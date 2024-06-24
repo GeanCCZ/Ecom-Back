@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class ProductService extends CRUDService <Product, UUID, ProductDTO>{
+public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
 
     private final ProductRepository productRepository;
 

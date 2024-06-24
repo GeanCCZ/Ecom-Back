@@ -2,13 +2,14 @@ package com.example.ecommerce.service;
 
 import com.example.ecommerce.adapter.Adapter;
 import com.example.ecommerce.repository.CRUDRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public abstract class CRUDService<T, ID, DTO>{
 
     private final CRUDRepository<T,ID> repository;
@@ -38,7 +39,7 @@ public abstract class CRUDService<T, ID, DTO>{
     }
 
     public T findById(ID id){
-        return this.repository.findById(id).get();
+        return this.repository.findById(id).isPresent() ? this.repository.findById(id).get() : null;
     }
 
     protected abstract void checkSave(DTO dto, T entityToSave);

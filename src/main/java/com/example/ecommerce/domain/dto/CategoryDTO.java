@@ -11,4 +11,5 @@ public record CategoryDTO(
     String display_name,
 
     List<SubCategory> subCategoryList
+
 ){}
