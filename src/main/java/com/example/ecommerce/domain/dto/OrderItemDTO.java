@@ -9,6 +9,9 @@ import java.util.UUID;
 
 public record OrderItemDTO(
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UUID id,
+
     @NotNull(message = "'Product' must be informed")
     Product product,
 

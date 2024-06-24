@@ -11,6 +11,9 @@ import java.util.UUID;
 
 public record RootGroupDTO(
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UUID id,
+
     @NotNull(message = "'Display_name' must be informed")
     String display_name,
 

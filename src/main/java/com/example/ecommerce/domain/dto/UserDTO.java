@@ -13,6 +13,9 @@ import java.util.UUID;
 
 public record UserDTO(
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UUID id,
+
     @NotNull(message = "'Address' must be informed")
     List<Address> address,
 

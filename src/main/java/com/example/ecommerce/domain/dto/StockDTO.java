@@ -9,6 +9,9 @@ import java.util.UUID;
 
 public record StockDTO(
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UUID id,
+
     @NotNull
     Integer quantity,
 

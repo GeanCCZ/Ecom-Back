@@ -10,6 +10,9 @@ import java.util.UUID;
 
 public record ReviewDTO(
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UUID id,
+
     @NotNull(message = "'Avaliation_value' must be informed")
     Integer avaliation_value,
 
