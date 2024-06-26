@@ -1,4 +1,4 @@
-package com.example.ecommerce.adapter;
+package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.AddressDTO;
 import com.example.ecommerce.domain.entities.Address;
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AddressAdapter implements Adapter<Address, AddressDTO>{
-
     @Override
     public Address fromDto(AddressDTO dto){
         return new Address(

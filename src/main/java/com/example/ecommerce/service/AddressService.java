@@ -1,6 +1,6 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.adapter.Adapter;
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.AddressDTO;
 import com.example.ecommerce.domain.entities.Address;
 import com.example.ecommerce.repository.CRUDRepository;

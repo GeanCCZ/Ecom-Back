@@ -1,8 +1,10 @@
-package com.example.ecommerce.adapter;
+package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.UserDTO;
 import com.example.ecommerce.domain.entities.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserAdapter implements Adapter<User, UserDTO> {
 
     @Override
@@ -24,6 +26,7 @@ public class UserAdapter implements Adapter<User, UserDTO> {
     @Override
     public UserDTO fromEntity(User entity) {
         return new UserDTO(
+                entity.getId(),
                 entity.getAddress(),
                 entity.getRole(),
                 entity.getImage(),

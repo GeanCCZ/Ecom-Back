@@ -1,6 +1,6 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.adapter.Adapter;
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.UserDTO;
 import com.example.ecommerce.domain.entities.User;
 import com.example.ecommerce.repository.CRUDRepository;
@@ -17,12 +17,14 @@ public class UserService extends CRUDService<User, UUID, UserDTO>{
     public UserService(CRUDRepository<User,UUID> repository, Adapter<User, UserDTO> adapter, UserRepository userRepository){
         super(repository,adapter);
         this.userRepository = userRepository;
-
     }
 
     @Override
-    protected void checkSave(){
-
+    protected void checkSave(UserDTO dto, User entity){
+        boolean alreadyExists = this.userRepository.findById(dto.id()).isPresent();
+        if(alreadyExists){
+            throw new RuntimeException();
+        }
     }
 
 }

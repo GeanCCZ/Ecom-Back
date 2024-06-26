@@ -1,6 +1,6 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.adapter.Adapter;
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.StockDTO;
 import com.example.ecommerce.domain.entities.Stock;
 import com.example.ecommerce.repository.CRUDRepository;
@@ -19,8 +19,11 @@ public class StockService extends CRUDService<Stock, UUID,StockDTO>{
     }
 
     @Override
-    protected void checkSave(){
-        boolean alreadyExists = this.
+    protected void checkSave(StockDTO dto, Stock entity){
+        boolean alreadyExists = this.stockRepository.findById(dto.id()).isPresent();
+        if(alreadyExists){
+            throw new RuntimeException();
+        }
     }
 
 }

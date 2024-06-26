@@ -1,8 +1,10 @@
-package com.example.ecommerce.adapter;
+package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.DiscountDTO;
 import com.example.ecommerce.domain.entities.Discount;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DiscountAdapter implements Adapter<Discount, DiscountDTO> {
 
     @Override
@@ -12,7 +14,7 @@ public class DiscountAdapter implements Adapter<Discount, DiscountDTO> {
 
     @Override
     public DiscountDTO fromEntity(Discount entity) {
-        return new DiscountDTO(entity.getPresentedValue(),entity.getType(),entity.getFinalValue(),entity.getProductList());
+        return new DiscountDTO(entity.getId(),entity.getPresentedValue(),entity.getType(),entity.getFinalValue(),entity.getProductList());
     };
 
 }

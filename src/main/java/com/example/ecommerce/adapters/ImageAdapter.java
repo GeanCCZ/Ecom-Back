@@ -1,8 +1,10 @@
-package com.example.ecommerce.adapter;
+package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.ImageDTO;
 import com.example.ecommerce.domain.entities.Image;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ImageAdapter implements Adapter<Image, ImageDTO> {
 
     @Override

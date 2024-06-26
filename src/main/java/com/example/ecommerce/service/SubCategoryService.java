@@ -1,6 +1,6 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.adapter.Adapter;
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.SubCategoryDTO;
 import com.example.ecommerce.domain.entities.SubCategory;
 import com.example.ecommerce.repository.CRUDRepository;
@@ -20,8 +20,11 @@ public class SubCategoryService extends CRUDService<SubCategory, UUID, SubCatego
     }
 
     @Override
-    protected void checkSave(){
-
+    protected void checkSave(SubCategoryDTO dto, SubCategory entity){
+        boolean alreadyExists = this.subCategoryRepository.findById(dto.id()).isPresent();
+        if(alreadyExists){
+            throw new RuntimeException();
+        }
     }
 
 }

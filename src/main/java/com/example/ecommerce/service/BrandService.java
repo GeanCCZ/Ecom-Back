@@ -1,10 +1,8 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.adapter.Adapter;
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.BrandDTO;
-import com.example.ecommerce.domain.dto.ProductDTO;
 import com.example.ecommerce.domain.entities.Brand;
-import com.example.ecommerce.domain.entities.Product;
 import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.BrandRepository;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.example.ecommerce.adapter;
+package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.ProductDTO;
 import com.example.ecommerce.domain.entities.Product;
@@ -28,6 +28,7 @@ public class ProductAdapter implements Adapter<Product, ProductDTO> {
     @Override
     public ProductDTO fromEntity(Product entity) {
         return new ProductDTO(
+                entity.getId(),
                 entity.getDisplayName(),
                 entity.getDescription(),
                 entity.getPrice(),

@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController(value = "/api/v1/")
 @RequiredArgsConstructor
-//@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/")
 public abstract class CRUDController <T, ID, DTO> {
 
     private static final String ID_PATH_VARIABLE = "/{id}";

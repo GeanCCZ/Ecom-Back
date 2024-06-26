@@ -1,4 +1,4 @@
-package com.example.ecommerce.adapter;
+package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.BrandDTO;
 import com.example.ecommerce.domain.entities.Brand;
@@ -14,7 +14,7 @@ public class BrandAdapter implements Adapter<Brand, BrandDTO> {
 
     @Override
     public BrandDTO fromEntity(Brand entity) {
-        return new BrandDTO(entity.getDisplay_name(), entity.getDisplay_name(), entity.getImage(), entity.getProductList());
+        return new BrandDTO(entity.getDisplayName(), entity.getDescription(), entity.getImage(), entity.getProductList());
     };
 
 }

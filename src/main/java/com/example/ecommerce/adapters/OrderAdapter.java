@@ -1,8 +1,10 @@
-package com.example.ecommerce.adapter;
+package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.OrderDTO;
 import com.example.ecommerce.domain.entities.Order;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrderAdapter implements Adapter<Order, OrderDTO> {
 
     @Override
@@ -21,6 +23,7 @@ public class OrderAdapter implements Adapter<Order, OrderDTO> {
     @Override
     public OrderDTO fromEntity(Order entity) {
         return new OrderDTO(
+                entity.getId(),
                 entity.isParcel(),
                 entity.getNumParcels(),
                 entity.getActualParcel(),

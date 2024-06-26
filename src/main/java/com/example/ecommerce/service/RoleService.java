@@ -1,6 +1,6 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.adapter.Adapter;
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.RoleDTO;
 import com.example.ecommerce.domain.entities.Role;
 import com.example.ecommerce.repository.CRUDRepository;
@@ -17,7 +17,6 @@ public class RoleService extends CRUDService<Role, UUID, RoleDTO>{
     public RoleService(CRUDRepository<Role,UUID> repository, Adapter<Role,RoleDTO > adapter,RoleRepository roleRepository){
         super(repository,adapter);
         this.roleRepository = roleRepository;
-
     }
 
     @Override

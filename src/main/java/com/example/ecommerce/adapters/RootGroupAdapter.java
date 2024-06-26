@@ -1,8 +1,10 @@
-package com.example.ecommerce.adapter;
+package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.RootGroupDTO;
 import com.example.ecommerce.domain.entities.RootGroup;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RootGroupAdapter implements Adapter<RootGroup, RootGroupDTO> {
 
     @Override
@@ -19,6 +21,7 @@ public class RootGroupAdapter implements Adapter<RootGroup, RootGroupDTO> {
     @Override
     public RootGroupDTO fromEntity(RootGroup entity) {
         return new RootGroupDTO(
+                entity.getId(),
                 entity.getDisplayName(),
                 entity.getSequence(),
                 entity.getImage(),

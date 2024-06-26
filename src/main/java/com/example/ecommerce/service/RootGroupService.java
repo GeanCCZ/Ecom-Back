@@ -1,6 +1,6 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.adapter.Adapter;
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.RootGroupDTO;
 import com.example.ecommerce.domain.entities.RootGroup;
 import com.example.ecommerce.repository.CRUDRepository;
@@ -16,13 +16,15 @@ public class RootGroupService extends CRUDService<RootGroup, UUID, RootGroupDTO>
 
     public RootGroupService(CRUDRepository<RootGroup,UUID> repository, Adapter<RootGroup,RootGroupDTO > adapter, RootGroupRepository rootGroupRepository){
         super(repository,adapter);
-        this.rootGroupRepository = rootGroupRepository
-
+        this.rootGroupRepository = rootGroupRepository;
     }
 
     @Override
-    protected void checkSave(){
-        boolean alreadyExists = this.
+    protected void checkSave(RootGroupDTO dto, RootGroup entity){
+        boolean alreadyExists = this.rootGroupRepository.findById(dto.id()).isPresent();
+        if(alreadyExists){
+            throw new RuntimeException();
+        }
     }
 
 }
