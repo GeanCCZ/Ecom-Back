@@ -20,7 +20,7 @@ public class AddressAdapter implements Adapter<Address, AddressDTO>{
                 dto.supplier(),
                 dto.user()
         );
-    };
+    }
 
     @Override
     public AddressDTO fromEntity(Address entity){
@@ -37,6 +37,6 @@ public class AddressAdapter implements Adapter<Address, AddressDTO>{
                 entity.getSupplier(),
                 entity.getUser()
         );
-    };
+    }
 
 }

@@ -30,12 +30,10 @@ public record ProductDTO(
 
     String applicable_discount,
 
+    @NotNull(message = "'Stock' must be informed")
     List<Stock> stockList,
 
     Discount discount,
-
-    @NotNull(message = "'ImageList' must be informed")
-    List<Image> image,
 
     @NotNull(message = "'Category' must be informed")
     Category category,

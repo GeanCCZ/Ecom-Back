@@ -43,7 +43,7 @@ public abstract class CRUDService<T, ID, DTO>{
 
     protected abstract void checkSave(DTO dto, T entityToSave);
 
-    private DTO getDTOFromEntity(T entity){ return adapter.fromEntity(entity); }
+    protected DTO getDTOFromEntity(T entity){ return adapter.fromEntity(entity); }
 
-    private T getEntityFromDTO(DTO dto){ return adapter.fromDto(dto);}
+    protected T getEntityFromDTO(DTO dto){ return adapter.fromDto(dto);}
 }
