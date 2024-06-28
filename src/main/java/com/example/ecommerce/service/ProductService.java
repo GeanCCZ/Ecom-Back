@@ -2,6 +2,7 @@ package com.example.ecommerce.service;
 
 import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.ProductDTO;
+import com.example.ecommerce.domain.entities.Brand;
 import com.example.ecommerce.domain.entities.Product;
 import com.example.ecommerce.domain.entities.Stock;
 import com.example.ecommerce.repository.CRUDRepository;
@@ -19,6 +20,9 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
     private final Adapter<Product,ProductDTO> adapter;
 
     private StockService stockService;
+    private SupplierService supplierService;
+    private BrandService brandService;
+
 
     public ProductService (CRUDRepository<Product,UUID> repository, Adapter<Product,ProductDTO> adapter,ProductRepository productRepository, StockService stockService){
         super(repository,adapter);
@@ -45,6 +49,8 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
             dto.stockList().clear();
             dto.stockList().addAll(stockList);
         }
+
+
         System.out.println(dto);
         Product newProduct = this.getEntityFromDTO(dto);
 
