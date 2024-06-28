@@ -7,6 +7,7 @@ import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.BrandRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,5 +26,9 @@ public class BrandService extends CRUDService<Brand, UUID, BrandDTO>{
         if(alreadyExists){
             throw new RuntimeException();
         }
+    }
+
+    protected Optional<Brand> findByDisplayName(String displayName){
+        return this.brandRepository.findByDisplayName(displayName);
     }
 }

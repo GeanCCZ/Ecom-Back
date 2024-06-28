@@ -7,6 +7,7 @@ import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.CategoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,6 +26,10 @@ public class CategoryService extends  CRUDService<Category,UUID, CategoryDTO>{
         if(alreadyExists){
             throw new RuntimeException();
         }
+    }
+
+    protected Optional<Category> findByDisplayName(String displayName){
+        return this.categoryRepository.findByDisplayName(displayName);
     }
 
 }

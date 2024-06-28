@@ -22,7 +22,7 @@ public class RootGroupController extends CRUDController<RootGroup, UUID, RootGro
     private final RootGroupService rootGroupService;
     public RootGroupController(CRUDService<RootGroup,UUID,RootGroupDTO> service, RootGroupService rootGroupService){
         super(service);
-        this.rootGroupService=rootGroupService;
+        this.rootGroupService = rootGroupService;
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})

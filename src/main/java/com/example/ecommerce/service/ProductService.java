@@ -2,6 +2,7 @@ package com.example.ecommerce.service;
 
 import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.ProductDTO;
+import com.example.ecommerce.domain.entities.Discount;
 import com.example.ecommerce.domain.entities.Product;
 import com.example.ecommerce.domain.entities.Stock;
 import com.example.ecommerce.repository.CRUDRepository;
@@ -18,18 +19,26 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
     private final ProductRepository productRepository;
     private final Adapter<Product,ProductDTO> adapter;
 
-    private final StockService stockService;
-    private final SupplierService supplierService;
     private final BrandService brandService;
+    private final CategoryService categoryService;
+    public final DiscountService discountService;
+    private final StockService stockService;
+    private final SubCategoryService subCategoryService;
+    private final SupplierService supplierService;
 
 
-    public ProductService (CRUDRepository<Product,UUID> repository, Adapter<Product,ProductDTO> adapter,ProductRepository productRepository, StockService stockService,SupplierService supplierService, BrandService brandService){
+
+
+    public ProductService (CRUDRepository<Product,UUID> repository, Adapter<Product,ProductDTO> adapter,ProductRepository productRepository, StockService stockService,SupplierService supplierService, BrandService brandService,CategoryService categoryService,SubCategoryService subCategoryService, DiscountService discountService){
         super(repository,adapter);
         this.productRepository = productRepository;
         this.adapter = adapter;
+        this.brandService = brandService;
+        this.categoryService = categoryService;
+        this.discountService = discountService;
         this.stockService = stockService;
-        this.supplierService=supplierService;
-        this.brandService=brandService;
+        this.subCategoryService = subCategoryService;
+        this.supplierService = supplierService;
     }
 
     public ProductDTO create(ProductDTO dto){
@@ -50,6 +59,17 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
             dto.stockList().clear();
             dto.stockList().addAll(stockList);
         }
+
+        if (this.brandService.findByDisplayName(dto.brand().getDisplayName()).isEmpty()){
+            throw new RuntimeException("Invalid brand");
+        }
+        if (this.categoryService.findByDisplayName(dto.category().getDisplayName()).isEmpty()) {
+            throw new RuntimeException("Invalid category");
+        }
+        if (this.supplierService.findByLegalName(dto.supplier().getLegalName()).isEmpty()){
+            throw new RuntimeException("Invalid supplier");
+        };
+
 
 
         System.out.println(dto);

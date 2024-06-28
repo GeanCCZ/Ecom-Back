@@ -7,6 +7,7 @@ import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.SupplierRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,6 +26,14 @@ public class SupplierService extends CRUDService<Supplier, UUID, SupplierDTO>{
         if(alreadyExists){
             throw new RuntimeException();
         }
+    }
+
+    protected Optional<Supplier> findByTradeName(String tradeName){
+        return this.supplierRepository.findByTradeName(tradeName);
+    }
+
+    protected Optional<Supplier> findByLegalName(String legalName){
+        return this.supplierRepository.findByLegalName(legalName);
     }
 
 }
