@@ -18,19 +18,24 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
     private final ProductRepository productRepository;
     private final Adapter<Product,ProductDTO> adapter;
 
-    private StockService stockService;
+    private final StockService stockService;
+    private final SupplierService supplierService;
+    private final BrandService brandService;
 
-    public ProductService (CRUDRepository<Product,UUID> repository, Adapter<Product,ProductDTO> adapter,ProductRepository productRepository, StockService stockService){
+
+    public ProductService (CRUDRepository<Product,UUID> repository, Adapter<Product,ProductDTO> adapter,ProductRepository productRepository, StockService stockService,SupplierService supplierService, BrandService brandService){
         super(repository,adapter);
         this.productRepository = productRepository;
         this.adapter = adapter;
         this.stockService = stockService;
+        this.supplierService=supplierService;
+        this.brandService=brandService;
     }
 
     public ProductDTO create(ProductDTO dto){
 
         if(!dto.stockList().isEmpty()){
-            List<Stock> stockList= new ArrayList<Stock>();
+            List<Stock> stockList= new ArrayList<>();
             for(Stock stock : dto.stockList()){
                 stockList.add(
                         this.stockService.getEntityFromDTO(
@@ -45,11 +50,13 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
             dto.stockList().clear();
             dto.stockList().addAll(stockList);
         }
+
+
         System.out.println(dto);
         Product newProduct = this.getEntityFromDTO(dto);
 
         return this.getDTOFromEntity(this.productRepository.save(newProduct));
-    };
+    }
 
     @Override
     protected void checkSave(ProductDTO dto, Product entity) {
@@ -61,7 +68,7 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
 
     protected Product getEntityFromDTO(ProductDTO dto){
         return this.adapter.fromDto(dto);
-    };
+    }
 
     protected ProductDTO getDTOFromEntity(Product entity){
         return this.adapter.fromEntity(entity);
