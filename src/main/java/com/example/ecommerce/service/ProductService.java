@@ -2,9 +2,9 @@ package com.example.ecommerce.service;
 
 import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.ProductDTO;
-import com.example.ecommerce.domain.entities.Discount;
 import com.example.ecommerce.domain.entities.Product;
 import com.example.ecommerce.domain.entities.Stock;
+import com.example.ecommerce.domain.entities.SubCategory;
 import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
     public ProductDTO create(ProductDTO dto){
 
         if(!dto.stockList().isEmpty()){
-            List<Stock> stockList= new ArrayList<>();
+            List<Stock> stockList = new ArrayList<>();
             for(Stock stock : dto.stockList()){
                 stockList.add(
                         this.stockService.getEntityFromDTO(
@@ -65,6 +65,16 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
         }
         if (this.categoryService.findByDisplayName(dto.category().getDisplayName()).isEmpty()) {
             throw new RuntimeException("Invalid category");
+        }
+        if (!dto.subCategoryList().isEmpty()){
+            List<SubCategory> subCategoryList = new ArrayList<>();
+            for(SubCategory subCategory : dto.subCategoryList()){
+                if(this.subCategoryService.findByDisplayName(subCategory.getDisplayName()).isPresent()) {
+                    subCategoryList.add(subCategory);
+                }
+            }
+            dto.subCategoryList().clear();
+            dto.subCategoryList().addAll(subCategoryList);
         }
         if (this.supplierService.findByLegalName(dto.supplier().getLegalName()).isEmpty()){
             throw new RuntimeException("Invalid supplier");

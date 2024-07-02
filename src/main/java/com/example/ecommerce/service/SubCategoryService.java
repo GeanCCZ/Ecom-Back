@@ -7,6 +7,7 @@ import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.SubCategoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,5 +27,9 @@ public class SubCategoryService extends CRUDService<SubCategory, UUID, SubCatego
             throw new RuntimeException();
         }
     }
+
+    protected Optional<SubCategory> findByDisplayName(String displayName){
+        return this.subCategoryRepository.findByDisplayName(displayName);
+    };
 
 }

@@ -18,7 +18,7 @@ public class ProductAdapter implements Adapter<Product, ProductDTO> {
                 dto.discount(),
                 null,
                 dto.category(),
-                dto.sub_category(),
+                dto.subCategoryList(),
                 dto.brand(),
                 dto.reviewList(),
                 dto.supplier()

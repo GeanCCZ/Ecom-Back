@@ -38,7 +38,7 @@ public record ProductDTO(
     @NotNull(message = "'Category' must be informed")
     Category category,
 
-    List<SubCategory> sub_category,
+    List<SubCategory> subCategoryList,
 
     @NotNull(message = "'Brand' must be informed")
     Brand brand,
