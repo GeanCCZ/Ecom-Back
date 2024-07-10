@@ -1,5 +1,6 @@
 package com.example.ecommerce.domain.dto;
 
+import com.example.ecommerce.domain.entities.Product;
 import com.example.ecommerce.domain.entities.SubCategory;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,5 @@ public record CategoryDTO(
     @NotNull(message = "'Display_name' must be informed")
     String display_name,
 
-    List<SubCategory> subCategoryList
-
+    List<Product> productList
 ){}

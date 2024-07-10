@@ -1,9 +1,6 @@
 package com.example.ecommerce.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +19,6 @@ public class Category extends BaseEntity{
     private String displayName;
 
     @OneToMany
-    private List<SubCategory> subCategoryList;
+    private List<Product> productList;
+
 }

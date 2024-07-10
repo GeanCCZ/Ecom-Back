@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 public class CategoryAdapter implements Adapter<Category, CategoryDTO>{
 
     public Category fromDto(CategoryDTO dto) {
-        return new Category(dto.display_name(),dto.subCategoryList());
+        return new Category(dto.display_name(),dto.productList());
     }
 
     public CategoryDTO fromEntity(Category entity) {
-        return new CategoryDTO(entity.getId(),entity.getDisplayName(),entity.getSubCategoryList());
+        return new CategoryDTO(entity.getId(),entity.getDisplayName(),entity.getProductList());
     }
 
 }

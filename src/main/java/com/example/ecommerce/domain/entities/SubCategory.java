@@ -22,10 +22,6 @@ public class SubCategory extends BaseEntity{
     @Column(name = "display_name",nullable = false)
     private String displayName;
 
-    @ManyToOne
-    @JoinColumn
-    private Category category;
-
     @ManyToMany
     private List<Product> productList;
 }

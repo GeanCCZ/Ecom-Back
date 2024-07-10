@@ -11,7 +11,6 @@ public class SubCategoryAdapter implements Adapter<SubCategory, SubCategoryDTO> 
     public SubCategory fromDto(SubCategoryDTO dto) {
         return new SubCategory(
                 dto.display_name(),
-                dto.category(),
                 dto.productList()
         );
     }
@@ -21,7 +20,6 @@ public class SubCategoryAdapter implements Adapter<SubCategory, SubCategoryDTO> 
         return new SubCategoryDTO(
                 entity.getId(),
                 entity.getDisplayName(),
-                entity.getCategory(),
                 entity.getProductList()
         );
     }

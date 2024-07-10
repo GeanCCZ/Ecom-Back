@@ -26,9 +26,6 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
     private final SubCategoryService subCategoryService;
     private final SupplierService supplierService;
 
-
-
-
     public ProductService (CRUDRepository<Product,UUID> repository, Adapter<Product,ProductDTO> adapter,ProductRepository productRepository, StockService stockService,SupplierService supplierService, BrandService brandService,CategoryService categoryService,SubCategoryService subCategoryService, DiscountService discountService){
         super(repository,adapter);
         this.productRepository = productRepository;
@@ -63,16 +60,24 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
         if (this.brandService.findByDisplayName(dto.brand().getDisplayName()).isEmpty()){
             throw new RuntimeException("Invalid brand");
         }
+
         if (this.categoryService.findByDisplayName(dto.category().getDisplayName()).isEmpty()) {
             throw new RuntimeException("Invalid category");
         }
+
         if (!dto.subCategoryList().isEmpty()){
             List<SubCategory> subCategoryList = new ArrayList<>();
+
             for(SubCategory subCategory : dto.subCategoryList()){
+
                 if(this.subCategoryService.findByDisplayName(subCategory.getDisplayName()).isPresent()) {
+
                     subCategoryList.add(subCategory);
+
                 }
+
             }
+
             dto.subCategoryList().clear();
             dto.subCategoryList().addAll(subCategoryList);
         }
@@ -80,9 +85,6 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
             throw new RuntimeException("Invalid supplier");
         };
 
-
-
-        System.out.println(dto);
         Product newProduct = this.getEntityFromDTO(dto);
 
         return this.getDTOFromEntity(this.productRepository.save(newProduct));

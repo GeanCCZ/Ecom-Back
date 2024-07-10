@@ -13,10 +13,21 @@ import java.util.UUID;
 public class ReviewService extends CRUDService<Review, UUID, ReviewDTO>{
 
     private final ReviewRepository reviewRepository;
+    private final ProductService productService;
 
-    public ReviewService(CRUDRepository<Review,UUID> repository, Adapter<Review,ReviewDTO > adapter, ReviewRepository reviewRepository){
+    public ReviewService(CRUDRepository<Review,UUID> repository, Adapter<Review,ReviewDTO > adapter, ReviewRepository reviewRepository, ProductService productService){
         super(repository,adapter);
         this.reviewRepository = reviewRepository;
+        this.productService = productService;
+    }
+
+    @Override
+    public ReviewDTO create(ReviewDTO dto){
+        if(!this.productService.findById(dto.id()).getDisplayName().isEmpty()){
+            throw new RuntimeException("Product not found");
+        }
+
+        return this.getDTOFromEntity(this.reviewRepository.save(this.getEntityFromDTO(dto)));
     }
 
     @Override
