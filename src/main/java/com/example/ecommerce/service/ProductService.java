@@ -18,7 +18,6 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
 
     private final ProductRepository productRepository;
     private final Adapter<Product,ProductDTO> adapter;
-
     private final BrandService brandService;
     private final CategoryService categoryService;
     public final DiscountService discountService;

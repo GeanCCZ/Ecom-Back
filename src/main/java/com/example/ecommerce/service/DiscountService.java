@@ -14,9 +14,12 @@ public class DiscountService extends CRUDService<Discount, UUID, DiscountDTO> {
 
     private final DiscountRepository discountRepository;
 
+    private final Adapter<Discount,DiscountDTO> adapter;
+
     public DiscountService(CRUDRepository<Discount,UUID> repository, Adapter<Discount, DiscountDTO> adapter, DiscountRepository discountRepository){
         super(repository,adapter);
         this.discountRepository = discountRepository;
+        this.adapter = adapter;
     }
 
     @Override
@@ -26,5 +29,9 @@ public class DiscountService extends CRUDService<Discount, UUID, DiscountDTO> {
             throw new RuntimeException();
         }
     }
+
+    protected Discount getEntityFromDTO(DiscountDTO dto){ return this.adapter.fromDto(dto); }
+
+    protected DiscountDTO getDTOFromEntity(Discount entity){ return this.adapter.fromEntity(entity); }
 
 }
