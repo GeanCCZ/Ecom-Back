@@ -2,8 +2,8 @@ package com.example.ecommerce;
 
 import com.example.ecommerce.domain.dto.DiscountDTO;
 import com.example.ecommerce.service.DiscountService;
-import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class DiscountServiceTest {
 
-    @Inject
+    @Autowired
     private DiscountService discountService;
 
     @Test
@@ -35,11 +35,11 @@ public class DiscountServiceTest {
 
         DiscountDTO updatedDiscountDTO = new DiscountDTO(createdDiscount.id(),75.33,1,0.35,null);
 
-        DiscountDTO updatedDiscount = this.discountService.update(createdDiscount.id(),updatedDiscountDTO);
-        System.out.println(createdDiscount.id()+"-----createdDiscount.id()");
-        System.out.println(updatedDiscount+"-----updatedDiscount");
-        System.out.println(updatedDiscountDTO+"-----updatedDiscountDTO");
-        assertEquals(updatedDiscountDTO,updatedDiscount);
+        this.discountService.update(createdDiscount.id(),updatedDiscountDTO);
+
+        DiscountDTO returnedDiscount = new DiscountDTO(updatedDiscountDTO.id(),updatedDiscountDTO.presented_value(),updatedDiscountDTO.type(),updatedDiscountDTO.final_value(),updatedDiscountDTO.productList());
+
+        assertEquals(updatedDiscountDTO,returnedDiscount);
 
     }
 

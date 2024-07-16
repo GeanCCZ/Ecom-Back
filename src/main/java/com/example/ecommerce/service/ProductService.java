@@ -82,7 +82,7 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
         }
         if (this.supplierService.findByLegalName(dto.supplier().getLegalName()).isEmpty()){
             throw new RuntimeException("Invalid supplier");
-        };
+        }
 
         Product newProduct = this.getEntityFromDTO(dto);
 
