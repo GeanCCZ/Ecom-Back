@@ -39,7 +39,7 @@ public class DiscountServiceTest {
 
         DiscountDTO expectedDiscount = new DiscountDTO(updatedDiscount.id(), updatedDiscountDTO.presented_value(), updatedDiscountDTO.type(), updatedDiscountDTO.final_value(), updatedDiscountDTO.productList());
 
-        assertEquals(updatedDiscount, expectedDiscount);
+        assertEquals(expectedDiscount, updatedDiscountDTO);
 
     }
 
