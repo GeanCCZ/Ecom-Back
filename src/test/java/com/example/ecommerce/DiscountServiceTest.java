@@ -37,9 +37,9 @@ public class DiscountServiceTest {
 
         this.discountService.update(createdDiscount.id(),updatedDiscountDTO);
 
-        DiscountDTO returnedDiscount = new DiscountDTO(updatedDiscountDTO.id(),updatedDiscountDTO.presented_value(),updatedDiscountDTO.type(),updatedDiscountDTO.final_value(),updatedDiscountDTO.productList());
+        DiscountDTO expectedDiscount = new DiscountDTO(updatedDiscountDTO.id(), updatedDiscountDTO.presented_value(), updatedDiscountDTO.type(), updatedDiscountDTO.final_value(), updatedDiscountDTO.productList());
 
-        assertEquals(updatedDiscountDTO,returnedDiscount);
+        assertEquals(updatedDiscountDTO, expectedDiscount);
 
     }
 

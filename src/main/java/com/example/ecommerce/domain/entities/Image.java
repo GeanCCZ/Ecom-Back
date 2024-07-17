@@ -48,7 +48,4 @@ public class Image extends BaseEntity{
 
     @OneToOne
     private RootGroup rootGroup;
-
-
-
 }

@@ -31,7 +31,6 @@ public record AddressDTO (
     @NotNull(message = "'Country' must be informed")
     String country,
 
-    @NotNull(message = "'Complement' must be informed")
     String complement,
 
     @NotNull(message = "'Neighborhood' must be informed")
