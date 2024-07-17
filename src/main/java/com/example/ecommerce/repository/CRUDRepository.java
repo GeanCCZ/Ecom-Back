@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @NoRepositoryBean
-@Repository
 public interface CRUDRepository<T, ID> extends JpaRepository<T, ID> {
 }
