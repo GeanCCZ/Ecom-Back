@@ -35,11 +35,11 @@ public class DiscountServiceTest {
 
         DiscountDTO updatedDiscountDTO = new DiscountDTO(createdDiscount.id(),75.33,1,0.35,null);
 
-        this.discountService.update(createdDiscount.id(),updatedDiscountDTO);
+        DiscountDTO updatedDiscount = this.discountService.update(createdDiscount.id(),updatedDiscountDTO);
 
-        DiscountDTO expectedDiscount = new DiscountDTO(updatedDiscountDTO.id(), updatedDiscountDTO.presented_value(), updatedDiscountDTO.type(), updatedDiscountDTO.final_value(), updatedDiscountDTO.productList());
+        DiscountDTO expectedDiscount = new DiscountDTO(updatedDiscount.id(), updatedDiscountDTO.presented_value(), updatedDiscountDTO.type(), updatedDiscountDTO.final_value(), updatedDiscountDTO.productList());
 
-        assertEquals(updatedDiscountDTO, expectedDiscount);
+        assertEquals(updatedDiscount, expectedDiscount);
 
     }
 
