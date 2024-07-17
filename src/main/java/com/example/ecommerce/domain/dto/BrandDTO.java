@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 public record BrandDTO(
-
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UUID id,
     @NotNull(message = "'Display_name' must be informed")
     String display_name,
 
