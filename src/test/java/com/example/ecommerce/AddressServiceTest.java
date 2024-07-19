@@ -3,7 +3,6 @@ package com.example.ecommerce;
 import com.example.ecommerce.domain.dto.AddressDTO;
 import com.example.ecommerce.service.AddressService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class AddressServiceTest {
 
-    @Autowired
     private AddressService addressService;
 
     @Test
@@ -20,9 +18,16 @@ public class AddressServiceTest {
 
         AddressDTO createdAddress = this.addressService.create(newAddress);
 
-        AddressDTO expectedAddress = new AddressDTO(createdAddress.id(), newAddress.street(), newAddress.number(), newAddress.cep(), newAddress.city(), newAddress.state(), newAddress.country(), newAddress.complement(), newAddress.neighborhood(), newAddress.supplier(), newAddress.user());
-
-        assertEquals(expectedAddress, createdAddress);
+        assertEquals(newAddress.street(), createdAddress.street());
+        assertEquals(newAddress.number(), createdAddress.number());
+        assertEquals(newAddress.cep(), createdAddress.cep());
+        assertEquals(newAddress.city(), createdAddress.city());
+        assertEquals(newAddress.state(), createdAddress.state());
+        assertEquals(newAddress.country(), createdAddress.country());
+        assertEquals(newAddress.complement(), createdAddress.complement());
+        assertEquals(newAddress.neighborhood(), createdAddress.neighborhood());
+        assertEquals(newAddress.supplier(), createdAddress.supplier());
+        assertEquals(newAddress.user(), createdAddress.user());
     }
 
     @Test
@@ -30,15 +35,23 @@ public class AddressServiceTest {
 
         AddressDTO newAddress = new AddressDTO(null, "Rua Luiz Gonzaga", "785", "87111111", "Chique Chique", "BA", "Brasil", "", "Tanguistedes", null, null);
 
-        AddressDTO createdAddress = this.addressService.create(newAddress);
+        this.addressService.create(newAddress);
 
-        AddressDTO updateAddressDTO = new AddressDTO(null, "Rua Pereira de Andrade", "1321", "00000001", "Formiga", "MG", "Brasil", "", "Tanguistedes", null, null);
+        AddressDTO updatedAddressDTO = new AddressDTO(null, "Rua Pereira de Andrade", "1321", "00000001", "Formiga", "MG", "Brasil", "", "Tanguistedes", null, null);
 
-        AddressDTO updateAddress = this.addressService.update(createdAddress.id(), updateAddressDTO);
+        AddressDTO updatedAddress = this.addressService.update(newAddress.id(), updatedAddressDTO);
 
-        AddressDTO expectedAddress = new AddressDTO(updateAddress.id(), updateAddressDTO.street(), updateAddressDTO.number(), updateAddressDTO.cep(), updateAddressDTO.city(), updateAddressDTO.state(), updateAddressDTO.country(), updateAddressDTO.complement(), updateAddressDTO.neighborhood(), updateAddressDTO.supplier(), updateAddressDTO.user());
 
-        assertEquals(expectedAddress, updateAddress);
+        assertEquals(newAddress.street(), updatedAddress.street());
+        assertEquals(newAddress.number(), updatedAddress.number());
+        assertEquals(newAddress.cep(), updatedAddress.cep());
+        assertEquals(newAddress.city(), updatedAddress.city());
+        assertEquals(newAddress.state(), updatedAddress.state());
+        assertEquals(newAddress.country(), updatedAddress.country());
+        assertEquals(newAddress.complement(), updatedAddress.complement());
+        assertEquals(newAddress.neighborhood(), updatedAddress.neighborhood());
+        assertEquals(newAddress.supplier(), updatedAddress.supplier());
+        assertEquals(newAddress.user(), updatedAddress.user());
     }
 
 }

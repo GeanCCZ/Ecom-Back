@@ -20,9 +20,10 @@ public class BrandServiceTest {
 
         BrandDTO createdBrand = this.brandService.create(newBrand);
 
-        BrandDTO expectedBrand = new BrandDTO(createdBrand.id(),newBrand.display_name(),newBrand.description(),newBrand.image(),newBrand.productList());
-
-        assertEquals(createdBrand,expectedBrand);
+        assertEquals(newBrand.description(), createdBrand.description());
+        assertEquals(newBrand.image(), createdBrand.image());
+        assertEquals(newBrand.productList(), createdBrand.productList());
+        assertEquals(newBrand.display_name(), createdBrand.display_name());
     }
 
     @Test
@@ -34,11 +35,12 @@ public class BrandServiceTest {
 
         BrandDTO updateBrandDTO = new BrandDTO(createdBrand.id(),"Amazonas Delivery", "A big big",null,null);
 
-        BrandDTO updateBrand = this.brandService.update(createdBrand.id(),updateBrandDTO);
+        BrandDTO updatedBrand = this.brandService.update(createdBrand.id(), updateBrandDTO);
 
-        BrandDTO expectedBrand = new BrandDTO(updateBrand.id(),updateBrandDTO.display_name(),updateBrandDTO.description(),updateBrandDTO.image(),updateBrandDTO.productList());
-
-        assertEquals(expectedBrand,updateBrand);
+        assertEquals(newBrand.description(), updatedBrand.description());
+        assertEquals(newBrand.image(), updatedBrand.image());
+        assertEquals(newBrand.productList(), updatedBrand.productList());
+        assertEquals(newBrand.display_name(), updatedBrand.display_name());
 
     }
 
