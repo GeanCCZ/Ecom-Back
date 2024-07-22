@@ -3,6 +3,7 @@ package com.example.ecommerce;
 import com.example.ecommerce.domain.dto.AddressDTO;
 import com.example.ecommerce.service.AddressService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class AddressServiceTest {
 
+    @Autowired
     private AddressService addressService;
 
     @Test
@@ -41,17 +43,17 @@ public class AddressServiceTest {
 
         AddressDTO updatedAddress = this.addressService.update(newAddress.id(), updatedAddressDTO);
 
+        assertEquals(updatedAddressDTO.street(), updatedAddress.street());
+        assertEquals(updatedAddressDTO.number(), updatedAddress.number());
+        assertEquals(updatedAddressDTO.cep(), updatedAddress.cep());
+        assertEquals(updatedAddressDTO.city(), updatedAddress.city());
+        assertEquals(updatedAddressDTO.state(), updatedAddress.state());
+        assertEquals(updatedAddressDTO.country(), updatedAddress.country());
+        assertEquals(updatedAddressDTO.complement(), updatedAddress.complement());
+        assertEquals(updatedAddressDTO.neighborhood(), updatedAddress.neighborhood());
+        assertEquals(updatedAddressDTO.supplier(), updatedAddress.supplier());
+        assertEquals(updatedAddressDTO.user(), updatedAddress.user());
 
-        assertEquals(newAddress.street(), updatedAddress.street());
-        assertEquals(newAddress.number(), updatedAddress.number());
-        assertEquals(newAddress.cep(), updatedAddress.cep());
-        assertEquals(newAddress.city(), updatedAddress.city());
-        assertEquals(newAddress.state(), updatedAddress.state());
-        assertEquals(newAddress.country(), updatedAddress.country());
-        assertEquals(newAddress.complement(), updatedAddress.complement());
-        assertEquals(newAddress.neighborhood(), updatedAddress.neighborhood());
-        assertEquals(newAddress.supplier(), updatedAddress.supplier());
-        assertEquals(newAddress.user(), updatedAddress.user());
     }
 
 }
