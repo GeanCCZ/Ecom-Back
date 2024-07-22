@@ -4,10 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ import java.util.List;
 @Table(name = "discount")
 @Getter
 @Setter
+@Builder
 public class Discount extends BaseEntity{
 
     @Column(name = "presented_value")
