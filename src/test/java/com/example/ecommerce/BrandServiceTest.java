@@ -4,9 +4,12 @@ import com.example.ecommerce.domain.dto.BrandDTO;
 import com.example.ecommerce.service.BrandService;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.scheduling.annotation.Async;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -17,10 +20,11 @@ public class BrandServiceTest {
 
     private static final BrandDTO brandDTO = new BrandDTO(null,"Guugle","A new way to search your thoughts",null,null);
 
-    private BrandDTO createdBrand = this.createBrandInDB();
+    private BrandDTO createdBrand;
 
-    private BrandDTO createBrandInDB(){
-        return this.brandService.create(this.brandDTO);
+    @BeforeEach
+    public void createBrandInDB(){
+        this.createdBrand = this.brandService.create(this.brandDTO);
     }
 
     @Test
