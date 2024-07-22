@@ -23,7 +23,7 @@ public class ReviewService extends CRUDService<Review, UUID, ReviewDTO>{
 
     @Override
     public ReviewDTO create(ReviewDTO dto){
-        if(!this.productService.findById(dto.id()).getDisplayName().isEmpty()){
+        if(!this.productService.findById(dto.product().getId()).getDisplayName().isEmpty()){
             throw new RuntimeException("Product not found");
         }
 
