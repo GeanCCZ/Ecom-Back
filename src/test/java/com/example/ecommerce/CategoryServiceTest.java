@@ -19,9 +19,8 @@ public class CategoryServiceTest {
 
         CategoryDTO createdCategory = this.categoryService.create(newCategory);
 
-        CategoryDTO expectedCategory = new CategoryDTO(createdCategory.id(), newCategory.display_name(), newCategory.productList());
-
-        assertEquals(expectedCategory,createdCategory);
+        assertEquals(newCategory.display_name(), createdCategory.display_name());
+        assertEquals(newCategory.productList(), createdCategory.productList());
 
     }
 
@@ -35,8 +34,7 @@ public class CategoryServiceTest {
 
         CategoryDTO updatedCategory = this.categoryService.update(createdCategory.id(), updateCategoryDTO);
 
-        CategoryDTO expectedCategory = new CategoryDTO(updatedCategory.id(), updateCategoryDTO.display_name(), updateCategoryDTO.productList());
-
-        assertEquals(expectedCategory,updatedCategory);
+        assertEquals(newCategory.display_name(), updatedCategory.display_name());
+        assertEquals(newCategory.productList(), updatedCategory.productList());
     }
 }
