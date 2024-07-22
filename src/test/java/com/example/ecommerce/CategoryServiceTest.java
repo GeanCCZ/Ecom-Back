@@ -34,7 +34,7 @@ public class CategoryServiceTest {
 
         CategoryDTO updatedCategory = this.categoryService.update(createdCategory.id(), updateCategoryDTO);
 
-        assertEquals(newCategory.display_name(), updatedCategory.display_name());
-        assertEquals(newCategory.productList(), updatedCategory.productList());
+        assertEquals(updateCategoryDTO.display_name(), updatedCategory.display_name());
+        assertEquals(updateCategoryDTO.productList(), updatedCategory.productList());
     }
 }
