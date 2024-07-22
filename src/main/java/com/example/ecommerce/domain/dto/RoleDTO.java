@@ -9,12 +9,12 @@ import java.util.UUID;
 
 public record RoleDTO(
 
-        @JsonInclude(JsonInclude.Include.NON_NULL)
-        UUID id,
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UUID id,
 
-        @NotNull(message = "'Display Name' must be informed")
-        String display_name,
+    @NotNull(message = "'Display Name' must be informed")
+    String display_name,
 
-        List<User> user
+    List<User> user
 
 ){}
