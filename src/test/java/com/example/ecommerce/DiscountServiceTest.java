@@ -3,6 +3,7 @@ package com.example.ecommerce;
 import com.example.ecommerce.domain.dto.DiscountDTO;
 import com.example.ecommerce.service.DiscountService;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class DiscountServiceTest {
 
-    @Autowired
+    @InjectMocks
     private DiscountService discountService;
 
     @Test

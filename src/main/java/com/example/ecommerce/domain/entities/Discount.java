@@ -14,7 +14,6 @@ import java.util.List;
 @Table(name = "discount")
 @Getter
 @Setter
-@Builder
 public class Discount extends BaseEntity{
 
     @Column(name = "presented_value")

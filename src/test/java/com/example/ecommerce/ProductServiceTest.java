@@ -5,6 +5,7 @@ import com.example.ecommerce.domain.entities.*;
 import com.example.ecommerce.service.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,25 +18,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class ProductServiceTest {
 
-    @Autowired
+    @InjectMocks
     private ProductService productService;
 
-    @Autowired
+    @InjectMocks
     private BrandService brandService;
 
-    @Autowired
+    @InjectMocks
     private CategoryService categoryService;
 
-    @Autowired
+    @InjectMocks
     public DiscountService discountService;
 
-    @Autowired
+    @InjectMocks
     private StockService stockService;
 
-    @Autowired
+    @InjectMocks
     private SubCategoryService subCategoryService;
 
-    @Autowired
+    @InjectMocks
     private SupplierService supplierService;
 
     private static final Supplier supplier = new Supplier("Transistors Unlimited", "Transistors Unlimited LTDA", "We made transistors", "11110001/1",null, null,null);

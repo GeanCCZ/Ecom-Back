@@ -8,12 +8,14 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "stock")
 @Getter
+@Setter
 public class Stock extends BaseEntity{
 
     @Column(name = "quantity",nullable = false,columnDefinition = "Integer default 1")
