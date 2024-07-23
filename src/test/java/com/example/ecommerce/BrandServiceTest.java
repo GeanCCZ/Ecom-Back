@@ -46,8 +46,8 @@ public class BrandServiceTest {
         when(repository.save(any(Brand.class))).thenReturn(newBrand);
 
         brandService.create(brandDTO);
-
-        verify(repository).save(newBrand);
+        System.out.println(newBrand.toString());
+        verify(brandRepository).save(newBrand);
         verify(brandAdapter).fromEntity(newBrand);
 
     }
