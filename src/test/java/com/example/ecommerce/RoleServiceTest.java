@@ -3,6 +3,7 @@ package com.example.ecommerce;
 import com.example.ecommerce.domain.dto.RoleDTO;
 import com.example.ecommerce.service.RoleService;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class RoleServiceTest {
 
-    @Autowired
+    @InjectMocks
     private RoleService roleService;
 
     @Test

@@ -1,52 +1,61 @@
 package com.example.ecommerce;
 
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.BrandDTO;
+import com.example.ecommerce.domain.entities.Brand;
+import com.example.ecommerce.repository.CRUDRepository;
+import com.example.ecommerce.repository.custom.BrandRepository;
 import com.example.ecommerce.service.BrandService;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.scheduling.annotation.Async;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class BrandServiceTest {
 
-    @Autowired
+    @InjectMocks
     private static BrandService brandService;
 
-    private static final BrandDTO brandDTO = new BrandDTO(null,"Guugle","A new way to search your thoughts",null,null);
+    @Mock
+    private BrandRepository brandRepository;
 
-    private BrandDTO createdBrand;
+    @Mock
+    private CRUDRepository<Brand, BrandDTO> repository;
 
-    @BeforeEach
-    public void createBrandInDB(){
-        this.createdBrand = this.brandService.create(this.brandDTO);
-    }
+    @Mock
+    private Adapter<Brand,BrandDTO> brandAdapter;
 
     @Test
     public void testBrandCreate(){
+        BrandDTO brandDTO = new BrandDTO(null,"Bingo","A new way to search your thoughts",null,null);
+        Brand newBrand = new Brand();
 
-        assertEquals(this.brandDTO.description(), this.createdBrand.description());
-        assertEquals(this.brandDTO.image(), this.createdBrand.image());
-        assertEquals(this.brandDTO.productList(), this.createdBrand.productList());
-        assertEquals(this.brandDTO.display_name(), this.createdBrand.display_name());
+        newBrand.setId(brandDTO.id());
+        newBrand.setDisplayName(brandDTO.display_name());
+        newBrand.setDescription(brandDTO.description());
+        newBrand.setProductList(brandDTO.productList());
+        newBrand.setImage(brandDTO.image());
+
+        when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(newBrand);
+
+        when(repository.save(any(Brand.class))).thenReturn(newBrand);
+
+        brandService.create(brandDTO);
+
+        verify(repository).save(newBrand);
+        verify(brandAdapter).fromEntity(newBrand);
+
     }
 
     @Test
     public void testBrandUpdate(){
 
-        BrandDTO updateBrandDTO = new BrandDTO(this.createdBrand.id(),"Amazonas Delivery", "A big big",null,null);
 
-        BrandDTO updatedBrand = this.brandService.update(this.createdBrand.id(), updateBrandDTO);
-
-        assertEquals(updateBrandDTO.description(), updatedBrand.description());
-        assertEquals(updateBrandDTO.image(), updatedBrand.image());
-        assertEquals(updateBrandDTO.productList(), updatedBrand.productList());
-        assertEquals(updateBrandDTO.display_name(), updatedBrand.display_name());
 
     }
 

@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import java.util.Date;
 @Entity
 @Table(name = "review")
 @Getter
+@Setter
 public class Review extends BaseEntity{
 
     @Column(name = "avaliation_value",nullable = false)

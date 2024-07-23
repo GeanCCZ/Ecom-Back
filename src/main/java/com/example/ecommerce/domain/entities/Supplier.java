@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "supplier")
 @Getter
+@Setter
 public class Supplier extends BaseEntity{
 
     @Column(name = "trade_name",nullable = false)

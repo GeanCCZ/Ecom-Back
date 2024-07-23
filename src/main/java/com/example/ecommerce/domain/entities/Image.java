@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.File;
@@ -20,6 +21,7 @@ import java.net.URL;
 @Entity
 @Table(name = "image")
 @Getter
+@Setter
 public class Image extends BaseEntity{
 
     @Column(name = "public_id", nullable = true)
