@@ -23,6 +23,10 @@ public abstract class CRUDService<T, ID, DTO>{
 
     public DTO update(ID id,DTO dto){
 
+        if(this.findById(id) == null){
+            throw new RuntimeException();
+        }
+
         T updatedEntity = this.getEntityFromDTO(dto);
 
         return  this.getDTOFromEntity(this.repository.save(updatedEntity));

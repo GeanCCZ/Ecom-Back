@@ -9,15 +9,17 @@ import com.example.ecommerce.service.BrandService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class BrandServiceTest {
+class BrandServiceTest {
 
     @InjectMocks
     private static BrandService brandService;
@@ -26,13 +28,13 @@ public class BrandServiceTest {
     private BrandRepository brandRepository;
 
     @Mock
-    private CRUDRepository<Brand, BrandDTO> repository;
+    private CRUDRepository<Brand, UUID> repository;
 
     @Mock
     private Adapter<Brand,BrandDTO> brandAdapter;
 
     @Test
-    public void testBrandCreate(){
+     void testBrandCreate(){
         BrandDTO brandDTO = new BrandDTO(null,"Bingo","A new way to search your thoughts",null,null);
         Brand newBrand = new Brand();
 
@@ -47,8 +49,8 @@ public class BrandServiceTest {
         when(repository.save(any(Brand.class))).thenReturn(newBrand);
 
         brandService.create(brandDTO);
-        System.out.println(newBrand.toString());
-        verify(brandRepository).save(newBrand);
+
+        verify(repository).save(newBrand);
         verify(brandAdapter).fromEntity(newBrand);
 
         assertEquals(brandDTO.display_name(), newBrand.getDisplayName());
@@ -58,9 +60,36 @@ public class BrandServiceTest {
     }
 
     @Test
-    public void testBrandUpdate(){
+    void testBrandUpdate(){
+        BrandDTO brandDTO = new BrandDTO(null,"Bingo","A new way to search your thoughts",null,null);
+        Brand newBrand = new Brand();
 
+        newBrand.setId(brandDTO.id());
+        newBrand.setDisplayName(brandDTO.display_name());
+        newBrand.setDescription(brandDTO.description());
+        newBrand.setProductList(brandDTO.productList());
+        newBrand.setImage(brandDTO.image());
 
+        when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(newBrand);
+
+        when(repository.save(any(Brand.class))).thenReturn(newBrand);
+
+        BrandDTO createdBrand = brandService.create(brandDTO);
+
+        when(repository.findById(newBrand.getId())).thenReturn(java.util.Optional.of(newBrand));
+        System.out.println(createdBrand);
+        BrandDTO updateBrandDTO = new BrandDTO(createdBrand.id(),"Guugle","Open your mind",null,null);
+        Brand updatedBrand = new Brand();
+
+        updatedBrand.setId(updateBrandDTO.id());
+        updatedBrand.setDisplayName(updateBrandDTO.display_name());
+        updatedBrand.setDescription(updateBrandDTO.description());
+        updatedBrand.setProductList(updateBrandDTO.productList());
+        updatedBrand.setImage(updateBrandDTO.image());
+
+        when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(updatedBrand);
+
+        when(brandService.update(createdBrand.id(),updateBrandDTO)).thenReturn(brandAdapter.fromEntity(updatedBrand));
 
     }
 
