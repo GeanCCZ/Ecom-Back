@@ -12,6 +12,7 @@ import org.mockito.Mock;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -50,6 +51,10 @@ public class BrandServiceTest {
         verify(brandRepository).save(newBrand);
         verify(brandAdapter).fromEntity(newBrand);
 
+        assertEquals(brandDTO.display_name(), newBrand.getDisplayName());
+        assertEquals(brandDTO.description(), newBrand.getDescription());
+        assertEquals(brandDTO.productList(), newBrand.getProductList());
+        assertEquals(brandDTO.image(), newBrand.getImage());
     }
 
     @Test
