@@ -48,10 +48,10 @@ class BrandServiceTest {
 
         when(repository.save(any(Brand.class))).thenReturn(newBrand);
 
-        brandService.create(brandDTO);
+        this.brandService.create(brandDTO);
 
-        verify(repository).save(newBrand);
-        verify(brandAdapter).fromEntity(newBrand);
+        verify(this.repository).save(newBrand);
+        verify(this.brandAdapter).fromEntity(newBrand);
 
         assertEquals(brandDTO.display_name(), newBrand.getDisplayName());
         assertEquals(brandDTO.description(), newBrand.getDescription());
