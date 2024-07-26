@@ -72,11 +72,11 @@ class BrandServiceTest {
 
         when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(newBrand);
 
-        when(repository.save(any(Brand.class))).thenReturn(newBrand);
+        when(this.repository.save(any(Brand.class))).thenReturn(newBrand);
 
         BrandDTO createdBrand = brandService.create(brandDTO);
 
-        when(repository.findById(newBrand.getId())).thenReturn(java.util.Optional.of(newBrand));
+        when(this.repository.findById(newBrand.getId())).thenReturn(java.util.Optional.of(newBrand));
         System.out.println(createdBrand);
         BrandDTO updateBrandDTO = new BrandDTO(createdBrand.id(),"Guugle","Open your mind",null,null);
         Brand updatedBrand = new Brand();
@@ -90,6 +90,12 @@ class BrandServiceTest {
         when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(updatedBrand);
 
         when(brandService.update(createdBrand.id(),updateBrandDTO)).thenReturn(brandAdapter.fromEntity(updatedBrand));
+
+        brandService.update(createdBrand.id(),updateBrandDTO);
+
+        assertEquals(updateBrandDTO.display_name(), updatedBrand.getDisplayName());
+        assertEquals(updateBrandDTO.description(), updatedBrand.getDescription());
+        assertEquals(updateBrandDTO.productList(), updatedBrand.getProductList());
 
     }
 

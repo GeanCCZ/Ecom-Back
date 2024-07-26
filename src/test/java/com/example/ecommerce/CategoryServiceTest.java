@@ -1,12 +1,23 @@
 package com.example.ecommerce;
 
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.CategoryDTO;
+import com.example.ecommerce.domain.entities.Category;
+import com.example.ecommerce.repository.CRUDRepository;
+import com.example.ecommerce.repository.custom.CategoryRepository;
 import com.example.ecommerce.service.CategoryService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 
 @SpringBootTest
 public class CategoryServiceTest {
@@ -14,29 +25,52 @@ public class CategoryServiceTest {
     @InjectMocks
     private CategoryService categoryService;
 
+    @Mock
+    private CategoryRepository categoryRepository;
+
+    @Mock
+    private CRUDRepository<Category, UUID> repository;
+
+    @Mock
+    private Adapter<Category, CategoryDTO> categoryAdapter;
+
     @Test
     public void testCategoryCreate(){
 
-        CategoryDTO newCategory = new CategoryDTO(null,"Eletricidade",null);
+        CategoryDTO categoryDTO = new CategoryDTO(null,"Eletricidade",null);
+        Category newCategory = new Category();
 
-        CategoryDTO createdCategory = this.categoryService.create(newCategory);
+        newCategory.setDisplayName(categoryDTO.display_name());
+        newCategory.setProductList(categoryDTO.productList());
 
-        assertEquals(newCategory.display_name(), createdCategory.display_name());
-        assertEquals(newCategory.productList(), createdCategory.productList());
+        when(this.categoryAdapter.fromDto(any(CategoryDTO.class))).thenReturn(newCategory);
+        when(this.repository.save(any(Category.class))).thenReturn(newCategory);
+
+        this.categoryService.create(categoryDTO);
+
+        verify(this.repository).save(newCategory);
+        verify(this.categoryAdapter).fromEntity(newCategory);
+
+        assertEquals(categoryDTO.display_name(), newCategory.getDisplayName());
+        assertEquals(categoryDTO.productList(), newCategory.getProductList());
 
     }
 
     @Test
     public void testCategoryUpdate(){
-        CategoryDTO newCategory = new CategoryDTO(null,"Eletricidade",null);
+        CategoryDTO categoryDTO = new CategoryDTO(null,"Eletricidade",null);
+        Category newCategory = new Category();
 
-        CategoryDTO createdCategory = this.categoryService.create(newCategory);
+        newCategory.setDisplayName(categoryDTO.display_name());
+        newCategory.setProductList(categoryDTO.productList());
 
-        CategoryDTO updateCategoryDTO = new CategoryDTO(createdCategory.id(),"Frutifero",null);
+        when(this.categoryAdapter.fromDto(any(CategoryDTO.class))).thenReturn(newCategory);
+        when(this.repository.save(any(Category.class))).thenReturn(newCategory);
 
-        CategoryDTO updatedCategory = this.categoryService.update(createdCategory.id(), updateCategoryDTO);
+        CategoryDTO createdCategory = this.categoryService.create(categoryDTO);
 
-        assertEquals(updateCategoryDTO.display_name(), updatedCategory.display_name());
-        assertEquals(updateCategoryDTO.productList(), updatedCategory.productList());
+        when(this.repository.findById(createdCategory.id())).thenReturn(java.util.Optional.of(newCategory));
+
+        CategoryDTO updatedCategory = this.categoryService.update(createdCategory.id(),categoryDTO);
     }
 }

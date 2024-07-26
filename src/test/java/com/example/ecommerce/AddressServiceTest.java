@@ -51,7 +51,6 @@ public class AddressServiceTest {
         newAddress.setUser(addressDTO.user());
 
         when(this.addressAdapter.fromDto(any(AddressDTO.class))).thenReturn(newAddress);
-
         when(this.repository.save(any(Address.class))).thenReturn(newAddress);
 
         this.addressService.create(addressDTO);
@@ -90,26 +89,43 @@ public class AddressServiceTest {
         newAddress.setUser(addressDTO.user());
 
         when(this.addressAdapter.fromDto(any(AddressDTO.class))).thenReturn(newAddress);
-
         when(this.repository.save(any(Address.class))).thenReturn(newAddress);
 
-        this.addressService.create(addressDTO);
+        AddressDTO createdAddress = this.addressService.create(addressDTO);
 
-        verify(this.repository).save(newAddress);
-        verify(this.addressAdapter).fromEntity(newAddress);
+        when(this.repository.findById(newAddress.getId())).thenReturn(java.util.Optional.of(newAddress));
+
+        AddressDTO updatedAddressDTO = new AddressDTO(createdAddress.id(), "Rua Petruquio Japolino", "111", "66666666", "Formiga", "MG", "Brasil", "", "Pelourinho", null, null);
+        Address updatedAddress = new Address();
+
+        updatedAddress.setStreet(updatedAddressDTO.street());
+        updatedAddress.setNumber(updatedAddressDTO.number());
+        updatedAddress.setCep(updatedAddressDTO.cep());
+        updatedAddress.setCity(updatedAddressDTO.city());
+        updatedAddress.setState(updatedAddressDTO.state());
+        updatedAddress.setCountry(updatedAddressDTO.country());
+        updatedAddress.setComplement(updatedAddressDTO.complement());
+        updatedAddress.setNeighborhood(updatedAddressDTO.neighborhood());
+        updatedAddress.setSupplier(updatedAddressDTO.supplier());
+        updatedAddress.setUser(updatedAddressDTO.user());
+
+        when(this.addressAdapter.fromDto(any(AddressDTO.class))).thenReturn(updatedAddress);
+
+        when(this.addressService.update(createdAddress.id(), updatedAddressDTO)).thenReturn(this.addressAdapter.fromEntity(updatedAddress));
 
 
+        addressService.update(createdAddress.id(), updatedAddressDTO);
 
-        assertEquals(updatedAddressDTO.street(), updatedAddress.street());
-        assertEquals(updatedAddressDTO.number(), updatedAddress.number());
-        assertEquals(updatedAddressDTO.cep(), updatedAddress.cep());
-        assertEquals(updatedAddressDTO.city(), updatedAddress.city());
-        assertEquals(updatedAddressDTO.state(), updatedAddress.state());
-        assertEquals(updatedAddressDTO.country(), updatedAddress.country());
-        assertEquals(updatedAddressDTO.complement(), updatedAddress.complement());
-        assertEquals(updatedAddressDTO.neighborhood(), updatedAddress.neighborhood());
-        assertEquals(updatedAddressDTO.supplier(), updatedAddress.supplier());
-        assertEquals(updatedAddressDTO.user(), updatedAddress.user());
+        assertEquals(updatedAddressDTO.street(), updatedAddress.getStreet());
+        assertEquals(updatedAddressDTO.number(), updatedAddress.getNumber());
+        assertEquals(updatedAddressDTO.cep(), updatedAddress.getCep());
+        assertEquals(updatedAddressDTO.city(), updatedAddress.getCity());
+        assertEquals(updatedAddressDTO.state(), updatedAddress.getState());
+        assertEquals(updatedAddressDTO.country(), updatedAddress.getCountry());
+        assertEquals(updatedAddressDTO.complement(), updatedAddress.getComplement());
+        assertEquals(updatedAddressDTO.neighborhood(), updatedAddress.getNeighborhood());
+        assertEquals(updatedAddressDTO.supplier(), updatedAddress.getSupplier());
+        assertEquals(updatedAddressDTO.user(), updatedAddress.getUser());
 
     }
 
