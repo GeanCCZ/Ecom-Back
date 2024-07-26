@@ -31,11 +31,11 @@ class BrandServiceTest {
     private CRUDRepository<Brand, UUID> repository;
 
     @Mock
-    private Adapter<Brand,BrandDTO> brandAdapter;
+    private Adapter<Brand, BrandDTO> brandAdapter;
 
     @Test
-     void testBrandCreate(){
-        BrandDTO brandDTO = new BrandDTO(null,"Bingo","A new way to search your thoughts",null,null);
+    void testBrandCreate() {
+        BrandDTO brandDTO = new BrandDTO(null, "Bingo", "A new way to search your thoughts", null, null);
         Brand newBrand = new Brand();
 
         newBrand.setId(brandDTO.id());
@@ -45,7 +45,6 @@ class BrandServiceTest {
         newBrand.setImage(brandDTO.image());
 
         when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(newBrand);
-
         when(repository.save(any(Brand.class))).thenReturn(newBrand);
 
         this.brandService.create(brandDTO);
@@ -60,43 +59,36 @@ class BrandServiceTest {
     }
 
     @Test
-    void testBrandUpdate(){
-        BrandDTO brandDTO = new BrandDTO(null,"Bingo","A new way to search your thoughts",null,null);
+    void testBrandUpdate() {
+        BrandDTO brandDTO = new BrandDTO(null, "Bingo", "A new way to search your thoughts", null, null);
         Brand newBrand = new Brand();
-
-        newBrand.setId(brandDTO.id());
+        newBrand.setId(UUID.randomUUID());
         newBrand.setDisplayName(brandDTO.display_name());
         newBrand.setDescription(brandDTO.description());
         newBrand.setProductList(brandDTO.productList());
         newBrand.setImage(brandDTO.image());
 
         when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(newBrand);
-
         when(this.repository.save(any(Brand.class))).thenReturn(newBrand);
+        when(brandAdapter.fromEntity(any(Brand.class))).thenReturn(brandDTO);
 
-        BrandDTO createdBrand = brandService.create(brandDTO);
+        BrandDTO createdBrandDTO = this.brandService.create(brandDTO);
+        Brand createdBrand = brandAdapter.fromDto(createdBrandDTO);
 
-        when(this.repository.findById(newBrand.getId())).thenReturn(java.util.Optional.of(newBrand));
-        System.out.println(createdBrand);
-        BrandDTO updateBrandDTO = new BrandDTO(createdBrand.id(),"Guugle","Open your mind",null,null);
-        Brand updatedBrand = new Brand();
+        when(this.repository.findById(createdBrand.getId())).thenReturn(java.util.Optional.of(createdBrand));
 
-        updatedBrand.setId(updateBrandDTO.id());
-        updatedBrand.setDisplayName(updateBrandDTO.display_name());
-        updatedBrand.setDescription(updateBrandDTO.description());
-        updatedBrand.setProductList(updateBrandDTO.productList());
-        updatedBrand.setImage(updateBrandDTO.image());
+        BrandDTO updateBrandDTO = new BrandDTO(createdBrand.getId(), "Guugle", "Open your mind", null, null);
+        Brand updatedBrand = brandAdapter.fromDto(updateBrandDTO);
 
         when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(updatedBrand);
+        when(this.repository.save(any(Brand.class))).thenReturn(updatedBrand);
 
-        when(brandService.update(createdBrand.id(),updateBrandDTO)).thenReturn(brandAdapter.fromEntity(updatedBrand));
+        BrandDTO result = this.brandService.update(createdBrand.getId(), updateBrandDTO);
 
-        brandService.update(createdBrand.id(),updateBrandDTO);
+        verify(this.repository).save(updatedBrand);
 
         assertEquals(updateBrandDTO.display_name(), updatedBrand.getDisplayName());
         assertEquals(updateBrandDTO.description(), updatedBrand.getDescription());
         assertEquals(updateBrandDTO.productList(), updatedBrand.getProductList());
-
     }
-
 }
