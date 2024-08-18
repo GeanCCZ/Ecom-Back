@@ -6,13 +6,12 @@ import com.example.ecommerce.domain.entities.Brand;
 import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.BrandRepository;
 import com.example.ecommerce.service.BrandService;
-import com.example.ecommerce.service.CRUDService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
+import java.util.Collections;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,16 +46,12 @@ class BrandServiceTest {
         newBrand.setImage(brandDTO.image());
 
         when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(newBrand);
-        when(repository.save(any(Brand.class))).thenReturn(newBrand);
 
-        BrandDTO createdBrand = brandService.create(brandDTO);
-        System.out.println("brandDTO: " + brandDTO);
-//        System.out.println("createdBrand: " + createdBrand.displayName());
-//        System.out.println("newBrand: " + newBrand.getDisplayName());
-        System.out.println("newBrand: " + brandService.findAll());
+        when(brandRepository.save(any(Brand.class))).thenReturn(newBrand);
 
-//        verify(this.repository).save(newBrand);
-//        verify(this.brandAdapter).fromEntity(newBrand);
+        when(brandService.create(brandDTO)).thenReturn(brandDTO);
+
+        this.brandService.create(brandDTO);
 
         assertEquals(brandDTO.displayName(), newBrand.getDisplayName());
         assertEquals(brandDTO.description(), newBrand.getDescription());
@@ -76,13 +71,12 @@ class BrandServiceTest {
         newBrand.setImage(brandDTO.image());
 
         when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(newBrand);
+
         when(repository.save(any(Brand.class))).thenReturn(newBrand);
 
-        System.out.println("brandDTO: " + brandDTO);
+        when(brandService.create(brandDTO)).thenReturn(brandDTO);
 
         BrandDTO createdBrandDTO = this.brandService.create(brandDTO);
-
-        System.out.println("createdBrandDTO: " + createdBrandDTO);
 
         verify(this.repository).save(newBrand);
         verify(this.brandAdapter).fromEntity(newBrand);
@@ -93,7 +87,7 @@ class BrandServiceTest {
         Brand updatedBrand = brandAdapter.fromDto(updateBrandDTO);
 
         when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(updatedBrand);
-        when(this.repository.save(any(Brand.class))).thenReturn(updatedBrand);
+        when(this.brandService.update(createdBrandDTO.id(), updateBrandDTO)).thenReturn(updateBrandDTO);
 
         BrandDTO result = this.brandService.update(createdBrandDTO.id(), updateBrandDTO);
 
