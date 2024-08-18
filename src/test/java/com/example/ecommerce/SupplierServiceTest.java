@@ -21,8 +21,8 @@ public class SupplierServiceTest {
 
         SupplierDTO createdSupplier = this.supplierService.create(newSupplier);
 
-        assertEquals(newSupplier.trade_name(), createdSupplier.trade_name());
-        assertEquals(newSupplier.legal_name(), createdSupplier.legal_name());
+        assertEquals(newSupplier.tradeName(), createdSupplier.tradeName());
+        assertEquals(newSupplier.legalName(), createdSupplier.legalName());
         assertEquals(newSupplier.description(), createdSupplier.description());
         assertEquals(newSupplier.cnpj(), createdSupplier.cnpj());
 

@@ -11,8 +11,8 @@ public class OrderAdapter implements Adapter<Order, OrderDTO> {
     public Order fromDto(OrderDTO dto) {
         return new Order(
                 dto.parcel(),
-                dto.num_parcels(),
-                dto.actual_parcel(),
+                dto.numParcels(),
+                dto.actualParcel(),
                 dto.active(),
                 dto.date(),
                 dto.orderItems(),

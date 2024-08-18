@@ -19,4 +19,5 @@ public class CategoryController extends CRUDController<Category, UUID, CategoryD
     public CategoryController(CRUDService<Category, UUID, CategoryDTO> service) {
         super(service);
     }
+
 }

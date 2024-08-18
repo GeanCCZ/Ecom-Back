@@ -21,13 +21,13 @@ public class UserServiceTest {
 
         UserDTO createdUser = this.userService.create(newUser);
 
-        assertEquals(newUser.first_name(), createdUser.first_name());
-        assertEquals(newUser.last_name(), createdUser.last_name());
+        assertEquals(newUser.firstName(), createdUser.firstName());
+        assertEquals(newUser.lastName(), createdUser.lastName());
         assertEquals(newUser.email(), createdUser.email());
         assertEquals(newUser.phone(), createdUser.phone());
         assertEquals(newUser.password(), createdUser.password());
         assertEquals(newUser.role(), createdUser.role());
-        assertEquals(newUser.address(), createdUser.address());
+        assertEquals(newUser.addresses(), createdUser.addresses());
         assertEquals(newUser.orders(), createdUser.orders());
         assertEquals(newUser.reviewList(), createdUser.reviewList());
     }
@@ -42,13 +42,13 @@ public class UserServiceTest {
 
         UserDTO updatedUser = this.userService.update(createdUser.id(), updateUserDTO);
 
-        assertEquals(updateUserDTO.first_name(), updatedUser.first_name());
-        assertEquals(updateUserDTO.last_name(), updatedUser.last_name());
+        assertEquals(updateUserDTO.firstName(), updatedUser.firstName());
+        assertEquals(updateUserDTO.lastName(), updatedUser.lastName());
         assertEquals(updateUserDTO.email(), updatedUser.email());
         assertEquals(updateUserDTO.phone(), updatedUser.phone());
         assertEquals(updateUserDTO.password(), updatedUser.password());
         assertEquals(updateUserDTO.role(), updatedUser.role());
-        assertEquals(updateUserDTO.address(), updatedUser.address());
+        assertEquals(updateUserDTO.addresses(), updatedUser.addresses());
         assertEquals(updateUserDTO.orders(), updatedUser.orders());
         assertEquals(updateUserDTO.reviewList(), updatedUser.reviewList());
 

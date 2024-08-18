@@ -82,10 +82,10 @@ public class ProductServiceTest {
 
         ProductDTO createdProduct = this.productService.create(newProduct);
 
-        assertEquals(newProduct.display_name(), createdProduct.display_name());
+        assertEquals(newProduct.displayName(), createdProduct.displayName());
         assertEquals(newProduct.description(), createdProduct.description());
         assertEquals(newProduct.price(), createdProduct.price());
-        assertEquals(newProduct.applicable_discount(), createdProduct.applicable_discount());
+        assertEquals(newProduct.applicableDiscount(), createdProduct.applicableDiscount());
         assertEquals(newProduct.discount(), createdProduct.discount());
         assertEquals(newProduct.supplier(), createdProduct.supplier());
         assertEquals(newProduct.category(), createdProduct.category());
@@ -105,10 +105,10 @@ public class ProductServiceTest {
 
         ProductDTO updatedProduct = this.productService.update(createdProduct.id(), updateProductDTO);
 
-        assertEquals(updateProductDTO.display_name(), updatedProduct.display_name());
+        assertEquals(updateProductDTO.displayName(), updatedProduct.displayName());
         assertEquals(updateProductDTO.description(), updatedProduct.description());
         assertEquals(updateProductDTO.price(), updatedProduct.price());
-        assertEquals(updateProductDTO.applicable_discount(), updatedProduct.applicable_discount());
+        assertEquals(updateProductDTO.applicableDiscount(), updatedProduct.applicableDiscount());
         assertEquals(updateProductDTO.discount(), updatedProduct.discount());
         assertEquals(updateProductDTO.supplier(), updatedProduct.supplier());
         assertEquals(updateProductDTO.category(), updatedProduct.category());

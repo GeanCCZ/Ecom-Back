@@ -36,7 +36,7 @@ public class AddressServiceTest {
 
     @Test
     public void testCreateAddress() {
-        AddressDTO addressDTO = new AddressDTO(null, "Rua Luiz Gonzaga", "785", "87111111", "Chique Chique", "BA", "Brasil", "", "Tanguistedes", null, null);
+        AddressDTO addressDTO = new AddressDTO(UUID.randomUUID(), "Rua Luiz Gonzaga", "785", "87111111", "Chique Chique", "BA", "Brasil", "", "Tanguistedes", null, null);
         Address newAddress = new Address();
 
         newAddress.setStreet(addressDTO.street());
@@ -74,7 +74,7 @@ public class AddressServiceTest {
     @Test
     public void testUpdateAddress() {
 
-        AddressDTO addressDTO = new AddressDTO(null, "Rua Luiz Gonzaga", "785", "87111111", "Chique Chique", "BA", "Brasil", "", "Tanguistedes", null, null);
+        AddressDTO addressDTO = new AddressDTO(UUID.randomUUID(), "Rua Luiz Gonzaga", "785", "87111111", "Chique Chique", "BA", "Brasil", "", "Tanguistedes", null, null);
         Address newAddress = new Address();
 
         newAddress.setStreet(addressDTO.street());
@@ -93,7 +93,8 @@ public class AddressServiceTest {
 
         AddressDTO createdAddress = this.addressService.create(addressDTO);
 
-        when(this.repository.findById(newAddress.getId())).thenReturn(java.util.Optional.of(newAddress));
+        verify(this.repository).save(newAddress);
+        verify(this.addressAdapter).fromEntity(newAddress);
 
         AddressDTO updatedAddressDTO = new AddressDTO(createdAddress.id(), "Rua Petruquio Japolino", "111", "66666666", "Formiga", "MG", "Brasil", "", "Pelourinho", null, null);
         Address updatedAddress = new Address();

@@ -40,7 +40,7 @@ public class CategoryServiceTest {
         CategoryDTO categoryDTO = new CategoryDTO(null,"Eletricidade",null);
         Category newCategory = new Category();
 
-        newCategory.setDisplayName(categoryDTO.display_name());
+        newCategory.setDisplayName(categoryDTO.displayName());
         newCategory.setProductList(categoryDTO.productList());
 
         when(this.categoryAdapter.fromDto(any(CategoryDTO.class))).thenReturn(newCategory);
@@ -51,7 +51,7 @@ public class CategoryServiceTest {
         verify(this.repository).save(newCategory);
         verify(this.categoryAdapter).fromEntity(newCategory);
 
-        assertEquals(categoryDTO.display_name(), newCategory.getDisplayName());
+        assertEquals(categoryDTO.displayName(), newCategory.getDisplayName());
         assertEquals(categoryDTO.productList(), newCategory.getProductList());
 
     }
@@ -61,7 +61,7 @@ public class CategoryServiceTest {
         CategoryDTO categoryDTO = new CategoryDTO(null,"Eletricidade",null);
         Category newCategory = new Category();
 
-        newCategory.setDisplayName(categoryDTO.display_name());
+        newCategory.setDisplayName(categoryDTO.displayName());
         newCategory.setProductList(categoryDTO.productList());
 
         when(this.categoryAdapter.fromDto(any(CategoryDTO.class))).thenReturn(newCategory);

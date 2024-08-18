@@ -21,7 +21,7 @@ public class RootGroupServiceTest {
 
         RootGroupDTO createdRootGroup = this.rootGroupService.create(newRootGroup);
 
-        assertEquals(newRootGroup.display_name(), createdRootGroup.display_name());
+        assertEquals(newRootGroup.displayName(), createdRootGroup.displayName());
         assertEquals(newRootGroup.sequence(), createdRootGroup.sequence());
         assertEquals(newRootGroup.image(), createdRootGroup.image());
         assertEquals(newRootGroup.productList(), createdRootGroup.productList());
@@ -39,7 +39,7 @@ public class RootGroupServiceTest {
 
         RootGroupDTO updatedRootGroup = this.rootGroupService.update(createdRootGroup.id(), updateRootGroupDTO);
 
-        assertEquals(updateRootGroupDTO.display_name(), updatedRootGroup.display_name());
+        assertEquals(updateRootGroupDTO.displayName(), updatedRootGroup.displayName());
         assertEquals(updateRootGroupDTO.sequence(), updatedRootGroup.sequence());
         assertEquals(updateRootGroupDTO.image(), updatedRootGroup.image());
         assertEquals(updateRootGroupDTO.productList(), updatedRootGroup.productList());

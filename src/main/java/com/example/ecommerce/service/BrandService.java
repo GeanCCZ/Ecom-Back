@@ -22,7 +22,7 @@ public class BrandService extends CRUDService<Brand, UUID, BrandDTO>{
 
     @Override
     protected void checkSave(BrandDTO dto,Brand entity){
-        boolean alreadyExists = this.brandRepository.findByDisplayName(dto.display_name()).isPresent();
+        boolean alreadyExists = this.brandRepository.findByDisplayName(dto.displayName()).isPresent();
         if(alreadyExists){
             throw new RuntimeException();
         }

@@ -13,8 +13,8 @@ public record RoleDTO(
     UUID id,
 
     @NotNull(message = "'Display Name' must be informed")
-    String display_name,
+    String displayName,
 
-    List<User> user
+    List<User> userList
 
 ){}

@@ -29,4 +29,5 @@ public class ProductController extends CRUDController<Product, UUID, ProductDTO>
     public ProductDTO create(@RequestPart("product") @Valid ProductDTO dto, @RequestPart(value = "imageList",required = false) Image image){
         return this.service.create(dto);
     }
+
 }

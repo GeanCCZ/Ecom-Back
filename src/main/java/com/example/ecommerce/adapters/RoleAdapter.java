@@ -10,8 +10,8 @@ public class RoleAdapter implements Adapter<Role, RoleDTO> {
     @Override
     public Role fromDto(RoleDTO dto) {
         return new Role(
-                dto.display_name(),
-                dto.user()
+                dto.displayName(),
+                dto.userList()
         );
     }
 
@@ -20,7 +20,7 @@ public class RoleAdapter implements Adapter<Role, RoleDTO> {
         return new RoleDTO(
                 entity.getId(),
                 entity.getDisplayName(),
-                entity.getUser()
+                entity.getUserList()
         );
     }
 }

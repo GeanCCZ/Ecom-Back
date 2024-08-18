@@ -10,13 +10,13 @@ public class UserAdapter implements Adapter<User, UserDTO> {
     @Override
     public User fromDto(UserDTO dto) {
         return new User(
-                dto.address(),
+                dto.addresses(),
                 dto.role(),
                 dto.image(),
                 dto.orders(),
                 dto.reviewList(),
-                dto.first_name(),
-                dto.last_name(),
+                dto.firstName(),
+                dto.lastName(),
                 dto.email(),
                 dto.phone(),
                 dto.password()
@@ -27,7 +27,7 @@ public class UserAdapter implements Adapter<User, UserDTO> {
     public UserDTO fromEntity(User entity) {
         return new UserDTO(
                 entity.getId(),
-                entity.getAddress(),
+                entity.getAddresses(),
                 entity.getRole(),
                 entity.getImage(),
                 entity.getOrders(),

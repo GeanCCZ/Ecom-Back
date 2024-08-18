@@ -25,7 +25,7 @@ import java.net.URL;
 public class Image extends BaseEntity{
 
     @Column(name = "public_id", nullable = true)
-    private String public_id;
+    private String publicId;
 
     @Column(name = "source", nullable = true)
     private String source;
@@ -40,7 +40,7 @@ public class Image extends BaseEntity{
     private Integer sequence;
 
     @ToString.Exclude
-    File image_file;
+    File imageFile;
 
     @OneToOne
     private Brand brand;

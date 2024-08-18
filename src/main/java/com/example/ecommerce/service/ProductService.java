@@ -91,7 +91,7 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
 
     @Override
     protected void checkSave(ProductDTO dto, Product entity) {
-        boolean alreadyExists = this.productRepository.findByDisplayName(dto.display_name()).isPresent();
+        boolean alreadyExists = this.productRepository.findByDisplayName(dto.displayName()).isPresent();
         if(alreadyExists){
             throw new RuntimeException();
         }

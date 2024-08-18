@@ -15,7 +15,7 @@ public record RootGroupDTO(
     UUID id,
 
     @NotNull(message = "'Display_name' must be informed")
-    String display_name,
+    String displayName,
 
     @NotNull(message = "'Sequence' must be informed")
     Integer sequence,

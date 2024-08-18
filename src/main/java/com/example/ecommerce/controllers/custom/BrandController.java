@@ -16,6 +16,7 @@ import java.util.UUID;
 public class BrandController extends CRUDController<Brand, UUID, BrandDTO> {
 
     private final CRUDService<Brand,UUID,BrandDTO> service;
+
     public BrandController(CRUDService<Brand,UUID,BrandDTO> service){
         super(service);
         this.service = service;
@@ -23,7 +24,8 @@ public class BrandController extends CRUDController<Brand, UUID, BrandDTO> {
 
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public BrandDTO create(@RequestPart("brand") @Valid BrandDTO dto, @RequestPart(required = false) MultipartFile image ){
+    public BrandDTO create(@RequestPart("brand") @Valid BrandDTO dto, @RequestPart(value = "image", required = false) MultipartFile image) {
+        System.out.println("BrandController.create" + dto);
         return this.service.create(dto);
     }
 

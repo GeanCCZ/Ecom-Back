@@ -23,7 +23,7 @@ public class User extends BaseEntity {
 
     @OneToMany
     @JoinColumn
-    private List<Address> address;
+    private List<Address> addresses;
 
     @OneToOne
     @JoinColumn

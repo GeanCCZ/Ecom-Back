@@ -22,7 +22,7 @@ public class CategoryService extends  CRUDService<Category,UUID, CategoryDTO>{
 
     @Override
     protected void checkSave(CategoryDTO dto,Category entity){
-        boolean alreadyExists = this.categoryRepository.findByDisplayName(dto.display_name()).isPresent();
+        boolean alreadyExists = this.categoryRepository.findByDisplayName(dto.displayName()).isPresent();
         if(alreadyExists){
             throw new RuntimeException();
         }

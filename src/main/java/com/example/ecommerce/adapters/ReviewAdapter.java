@@ -10,7 +10,7 @@ public class ReviewAdapter implements Adapter<Review, ReviewDTO> {
     @Override
     public Review fromDto(ReviewDTO dto) {
         return new Review(
-                dto.avaliation_value(),
+                dto.avaliationValue(),
                 dto.comment(),
                 dto.date(),
                 dto.product(),

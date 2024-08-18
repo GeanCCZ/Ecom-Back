@@ -12,7 +12,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("image")
 public class ImageController extends CRUDController<Image, UUID, ImageDTO> {
+
     public ImageController(CRUDService<Image, UUID, ImageDTO> service){
         super(service);
     }
+
 }

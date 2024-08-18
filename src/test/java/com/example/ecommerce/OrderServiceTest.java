@@ -25,8 +25,8 @@ public class OrderServiceTest {
         OrderDTO createdOrder = this.orderService.create(newOrder);
 
         assertEquals(newOrder.parcel(), createdOrder.parcel());
-        assertEquals(newOrder.num_parcels(), createdOrder.num_parcels());
-        assertEquals(newOrder.actual_parcel(), createdOrder.actual_parcel());
+        assertEquals(newOrder.numParcels(), createdOrder.numParcels());
+        assertEquals(newOrder.actualParcel(), createdOrder.actualParcel());
         assertEquals(newOrder.active(), createdOrder.active());
         assertEquals(newOrder.date(), createdOrder.date());
         assertEquals(newOrder.orderItems(), createdOrder.orderItems());
@@ -46,8 +46,8 @@ public class OrderServiceTest {
         OrderDTO updatedOrder = this.orderService.update(createdOrder.id(),updateOrderDTO);
 
         assertEquals(updateOrderDTO.parcel(), updatedOrder.parcel());
-        assertEquals(updateOrderDTO.num_parcels(), updatedOrder.num_parcels());
-        assertEquals(updateOrderDTO.actual_parcel(), updatedOrder.actual_parcel());
+        assertEquals(updateOrderDTO.numParcels(), updatedOrder.numParcels());
+        assertEquals(updateOrderDTO.actualParcel(), updatedOrder.actualParcel());
         assertEquals(updateOrderDTO.active(), updatedOrder.active());
         assertEquals(updateOrderDTO.date(), updatedOrder.date());
         assertEquals(updateOrderDTO.orderItems(), updatedOrder.orderItems());

@@ -4,7 +4,6 @@ import com.example.ecommerce.domain.dto.OrderItemDTO;
 import com.example.ecommerce.service.OrderItemService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +22,7 @@ public class OrderItemServiceTest {
 
         assertEquals(newOrderItem.product(), createdOrderItem.product());
         assertEquals(newOrderItem.quantity(), createdOrderItem.quantity());
-        assertEquals(newOrderItem.total_price(), createdOrderItem.total_price());
+        assertEquals(newOrderItem.totalPrice(), createdOrderItem.totalPrice());
     }
 
     @Test
@@ -39,7 +38,7 @@ public class OrderItemServiceTest {
 
         assertEquals(updateOrderItemDTO.product(), updatedOrderItem.product());
         assertEquals(updateOrderItemDTO.quantity(), updatedOrderItem.quantity());
-        assertEquals(updateOrderItemDTO.total_price(), updatedOrderItem.total_price());
+        assertEquals(updateOrderItemDTO.totalPrice(), updatedOrderItem.totalPrice());
     }
 
 }

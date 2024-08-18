@@ -17,10 +17,10 @@ public record OrderDTO(
         boolean parcel,
 
         @NotNull(message = "'Num Parcels' must be informed")
-        Integer num_parcels,
+        Integer numParcels,
 
         @NotNull(message = "'Actual Parcel' must be informed")
-        Integer actual_parcel,
+        Integer actualParcel,
 
         @NotNull(message = "'Active' must be informed")
         boolean active,

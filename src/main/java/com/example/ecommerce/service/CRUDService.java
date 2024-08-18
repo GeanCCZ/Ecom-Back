@@ -3,6 +3,7 @@ package com.example.ecommerce.service;
 import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.repository.CRUDRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +17,12 @@ public abstract class CRUDService<T, ID, DTO>{
     private final Adapter<T, DTO> adapter;
 
     public DTO create(DTO dto){
+
         T newEntity = this.getEntityFromDTO(dto);
 
-        return this.getDTOFromEntity(repository.save(newEntity));
+        DTO createdRegister = this.getDTOFromEntity(repository.save(newEntity));
+
+        return createdRegister;
     }
 
     public DTO update(ID id,DTO dto){

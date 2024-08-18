@@ -10,12 +10,12 @@ public class ImageAdapter implements Adapter<Image, ImageDTO> {
     @Override
     public Image fromDto(ImageDTO dto) {
         return new Image(
-                dto.public_id(),
+                dto.publicId(),
                 dto.source(),
                 dto.alt(),
                 dto.url(),
                 dto.sequence(),
-                dto.image_file(),
+                dto.imageFile(),
                 dto.brand(),
                 dto.product(),
                 dto.rootGroup()
@@ -26,12 +26,12 @@ public class ImageAdapter implements Adapter<Image, ImageDTO> {
     public ImageDTO fromEntity(Image entity) {
         return new ImageDTO(
                 entity.getId(),
-                entity.getPublic_id(),
+                entity.getPublicId(),
                 entity.getSource(),
                 entity.getAlt(),
                 entity.getUrl(),
                 entity.getSequence(),
-                entity.getImage_file(),
+                entity.getImageFile(),
                 entity.getBrand(),
                 entity.getProduct(),
                 entity.getRootGroup()

@@ -21,7 +21,7 @@ public class SubCategoryServiceTest {
 
          SubCategoryDTO createdSubCategory = this.subCategoryService.create(newSubCategory);
 
-         assertEquals(newSubCategory.display_name(), createdSubCategory.display_name());
+        assertEquals(newSubCategory.displayName(), createdSubCategory.displayName());
 
          assertEquals(newSubCategory.productList(), createdSubCategory.productList());
 
@@ -37,7 +37,7 @@ public class SubCategoryServiceTest {
 
          SubCategoryDTO updatedSubCategory = this.subCategoryService.update(createdSubCategory.id(), updateSubCategoryDTO);
 
-         assertEquals(updateSubCategoryDTO.display_name(), updatedSubCategory.display_name());
+        assertEquals(updateSubCategoryDTO.displayName(), updatedSubCategory.displayName());
 
          assertEquals(updateSubCategoryDTO.productList(), updatedSubCategory.productList());
     }

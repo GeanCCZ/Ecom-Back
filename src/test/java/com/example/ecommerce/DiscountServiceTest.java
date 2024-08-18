@@ -22,11 +22,11 @@ public class DiscountServiceTest {
 
         DiscountDTO createdDiscount = this.discountService.create(newDiscount);
 
-        DiscountDTO expectedDiscount = new DiscountDTO(createdDiscount.id(),newDiscount.presented_value(),newDiscount.type(),newDiscount.final_value(),newDiscount.productList());
+        DiscountDTO expectedDiscount = new DiscountDTO(createdDiscount.id(), newDiscount.presentedValue(), newDiscount.type(), newDiscount.finalValue(), newDiscount.productList());
 
         assertEquals(newDiscount.type(), expectedDiscount.type());
-        assertEquals(newDiscount.presented_value(), expectedDiscount.presented_value());
-        assertEquals(newDiscount.final_value(), expectedDiscount.final_value());
+        assertEquals(newDiscount.presentedValue(), expectedDiscount.presentedValue());
+        assertEquals(newDiscount.finalValue(), expectedDiscount.finalValue());
         assertEquals(newDiscount.productList(), expectedDiscount.productList());
     }
 
@@ -42,8 +42,8 @@ public class DiscountServiceTest {
         DiscountDTO updatedDiscount = this.discountService.update(createdDiscount.id(),updatedDiscountDTO);
 
         assertEquals(updatedDiscountDTO.type(), updatedDiscount.type());
-        assertEquals(updatedDiscountDTO.presented_value(), updatedDiscount.presented_value());
-        assertEquals(updatedDiscountDTO.final_value(), updatedDiscount.final_value());
+        assertEquals(updatedDiscountDTO.presentedValue(), updatedDiscount.presentedValue());
+        assertEquals(updatedDiscountDTO.finalValue(), updatedDiscount.finalValue());
         assertEquals(updatedDiscountDTO.productList(), updatedDiscount.productList());
 
     }

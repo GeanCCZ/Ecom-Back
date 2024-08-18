@@ -10,10 +10,10 @@ public class ProductAdapter implements Adapter<Product, ProductDTO> {
     @Override
     public Product fromDto(ProductDTO dto) {
         return new Product(
-                dto.display_name(),
+                dto.displayName(),
                 dto.description(),
                 dto.price(),
-                dto.applicable_discount(),
+                dto.applicableDiscount(),
                 dto.stockList(),
                 dto.discount(),
                 null,

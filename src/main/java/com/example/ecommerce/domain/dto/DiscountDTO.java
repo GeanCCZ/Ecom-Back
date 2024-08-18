@@ -14,13 +14,13 @@ public record DiscountDTO(
     UUID id,
 
     @NotNull(message = "'Presented_value' must be informed")
-    Double presented_value,
+    Double presentedValue,
 
     @NotNull(message = "'Type' must be informed")
     Number type,
 
     @NotNull(message = "'Final_value' must be informed")
-    Double final_value,
+    Double finalValue,
 
     List<Product> productList
 ){}

@@ -14,7 +14,7 @@ public record CategoryDTO(
     UUID id,
 
     @NotNull(message = "'Display_name' must be informed")
-    String display_name,
+    String displayName,
 
     List<Product> productList
 ){}
