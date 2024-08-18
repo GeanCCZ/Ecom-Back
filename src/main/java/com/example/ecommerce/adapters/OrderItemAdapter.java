@@ -13,7 +13,7 @@ public class OrderItemAdapter implements Adapter<OrderItem, OrderItemDTO> {
                 dto.product(),
                 dto.order(),
                 dto.quantity(),
-                dto.total_price()
+                dto.totalPrice()
         );
     }
 

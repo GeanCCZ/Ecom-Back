@@ -20,7 +20,7 @@ public record ProductDTO(
     UUID id,
 
     @NotNull(message = "'Display_name' must be informed")
-    String display_name,
+    String displayName,
 
     @NotNull(message = "'Description' must be informed")
     String description,
@@ -28,7 +28,7 @@ public record ProductDTO(
     @NotNull(message = "'Price' must be informed")
     Double price,
 
-    String applicable_discount,
+    String applicableDiscount,
 
     @NotNull(message = "'Stock' must be informed")
     List<Stock> stockList,

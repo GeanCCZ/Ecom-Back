@@ -10,8 +10,8 @@ public class SupplierAdapter implements Adapter<Supplier, SupplierDTO> {
     @Override
     public Supplier fromDto(SupplierDTO dto) {
         return new Supplier(
-                dto.trade_name(),
-                dto.legal_name(),
+                dto.tradeName(),
+                dto.legalName(),
                 dto.description(),
                 dto.cnpj(),
                 dto.addressList(),

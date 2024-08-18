@@ -22,5 +22,5 @@ public record OrderItemDTO(
     int quantity,
 
     @NotNull(message = "'Total_price' must be informed")
-    Double total_price
+    Double totalPrice
 ){}

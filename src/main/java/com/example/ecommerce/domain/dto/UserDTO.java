@@ -17,7 +17,7 @@ public record UserDTO(
     UUID id,
 
     @NotNull(message = "'Address' must be informed")
-    List<Address> address,
+    List<Address> addressList,
 
     @NotNull(message = "'Role' must be informed")
     Role role,
@@ -29,10 +29,10 @@ public record UserDTO(
     List<Review> reviewList,
 
     @NotNull(message = "'First_name' must be informed")
-    String first_name,
+    String firstName,
 
     @NotNull(message = "'Last_name' must be informed")
-    String last_name,
+    String lastName,
 
     @NotNull(message = "'Email' must be informed")
     String email,

@@ -10,7 +10,7 @@ public class RootGroupAdapter implements Adapter<RootGroup, RootGroupDTO> {
     @Override
     public RootGroup fromDto(RootGroupDTO dto) {
         return new RootGroup(
-                dto.display_name(),
+                dto.displayName(),
                 dto.sequence(),
                 dto.image(),
                 dto.productList(),

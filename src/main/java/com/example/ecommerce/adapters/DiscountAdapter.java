@@ -9,7 +9,7 @@ public class DiscountAdapter implements Adapter<Discount, DiscountDTO> {
 
     @Override
     public Discount fromDto(DiscountDTO dto) {
-        return new Discount(dto.presented_value(),dto.type(),dto.final_value(),dto.productList());
+        return new Discount(dto.presentedValue(), dto.type(), dto.finalValue(), dto.productList());
     }
 
     @Override

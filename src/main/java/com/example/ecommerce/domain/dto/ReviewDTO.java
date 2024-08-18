@@ -14,7 +14,7 @@ public record ReviewDTO(
     UUID id,
 
     @NotNull(message = "'Avaliation_value' must be informed")
-    Integer avaliation_value,
+    Integer avaliationValue,
 
     @NotNull(message = "'Comment' must be informed")
     String comment,

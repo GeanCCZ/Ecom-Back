@@ -9,7 +9,7 @@ public class BrandAdapter implements Adapter<Brand, BrandDTO> {
 
     @Override
     public Brand fromDto(BrandDTO dto) {
-        return new Brand(dto.display_name(),dto.description(),dto.image(),dto.productList());
+        return new Brand(dto.displayName(), dto.description(), dto.image(), dto.productList());
     }
 
     @Override

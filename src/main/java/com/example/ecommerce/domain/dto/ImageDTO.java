@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.File;
-import java.net.URL;
 import java.util.UUID;
 
 public record ImageDTO(
@@ -16,7 +15,7 @@ public record ImageDTO(
     UUID id,
 
     @NotNull(message = "'public_id' must be informed")
-    String public_id,
+    String publicId,
 
     @NotNull(message = "'Source' must be informed")
     String source,
@@ -30,7 +29,7 @@ public record ImageDTO(
     @NotNull(message = "'Sequence' must be informed")
     Integer sequence,
 
-    File image_file,
+    File imageFile,
 
     Brand brand,
 

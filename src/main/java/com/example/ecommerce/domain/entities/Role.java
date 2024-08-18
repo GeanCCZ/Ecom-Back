@@ -23,5 +23,5 @@ public class Role extends BaseEntity{
     private String displayName;
 
     @OneToMany
-    private List<User> user;
+    private List<User> userList;
 }

@@ -10,7 +10,7 @@ public class SubCategoryAdapter implements Adapter<SubCategory, SubCategoryDTO> 
     @Override
     public SubCategory fromDto(SubCategoryDTO dto) {
         return new SubCategory(
-                dto.display_name(),
+                dto.displayName(),
                 dto.productList()
         );
     }

@@ -13,15 +13,22 @@ public record SupplierDTO(
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
         UUID id,
+
         @NotNull(message = "'Trade Name' must be informed")
-        String trade_name,
+        String tradeName,
+
         @NotNull(message = "'Legal Name' must be informed")
-        String legal_name,
+        String legalName,
+
         @NotNull(message = "'Description' must be informed")
         String description,
+
         @NotNull(message = "'CNPJ' must be informed")
         String cnpj,
+
         List<Address> addressList,
+
         List<Stock> stockList,
+
         List<Product> productList
 ){}
