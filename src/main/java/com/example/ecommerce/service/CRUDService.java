@@ -26,9 +26,9 @@ public abstract class CRUDService<T, ID, DTO>{
     }
 
     public DTO update(ID id,DTO dto){
-
+        System.out.println(id + "ID: " + this.findById(id));
         if(this.findById(id) == null){
-            throw new RuntimeException();
+            throw new RuntimeException("Register not found");
         }
 
         T updatedEntity = this.getEntityFromDTO(dto);
