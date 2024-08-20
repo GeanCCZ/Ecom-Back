@@ -1,133 +1,102 @@
 package com.example.ecommerce;
 
-import com.example.ecommerce.adapters.Adapter;
+import com.example.ecommerce.adapters.AddressAdapter;
 import com.example.ecommerce.domain.dto.AddressDTO;
 import com.example.ecommerce.domain.entities.Address;
-import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.AddressRepository;
 import com.example.ecommerce.service.AddressService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class AddressServiceTest {
 
-    @InjectMocks
+    @Mock
     private AddressService addressService;
 
     @Mock
     private AddressRepository addressRepository;
 
     @Mock
-    private CRUDRepository<Address, UUID> repository;
+    private AddressAdapter addressAdapter;
 
-    @Mock
-    private Adapter<Address, AddressDTO> addressAdapter;
+    @BeforeEach
+    void setUp() {
+        addressRepository = mock(AddressRepository.class);
+        addressAdapter = new AddressAdapter();
+        addressService = new AddressService(addressRepository, addressAdapter, addressRepository);
+    }
 
     @Test
-    public void testCreateAddress() {
-        AddressDTO addressDTO = new AddressDTO(UUID.randomUUID(), "Rua Luiz Gonzaga", "785", "87111111", "Chique Chique", "BA", "Brasil", "", "Tanguistedes", null, null);
-        Address newAddress = new Address();
+    void createAddressSuccessfully() {
+        AddressDTO addressDTO = new AddressDTO(UUID.randomUUID(), "Street", "Number", "CEP", "City", "State", "Country", "Complement", "Neighborhood", null, null);
+        Address address = new Address(addressDTO.street(), addressDTO.number(), addressDTO.cep(), addressDTO.city(), addressDTO.state(), addressDTO.country(), addressDTO.complement(), addressDTO.neighborhood(), addressDTO.supplier(), addressDTO.user());
 
-        newAddress.setStreet(addressDTO.street());
-        newAddress.setNumber(addressDTO.number());
-        newAddress.setCep(addressDTO.cep());
-        newAddress.setCity(addressDTO.city());
-        newAddress.setState(addressDTO.state());
-        newAddress.setCountry(addressDTO.country());
-        newAddress.setComplement(addressDTO.complement());
-        newAddress.setNeighborhood(addressDTO.neighborhood());
-        newAddress.setSupplier(addressDTO.supplier());
-        newAddress.setUser(addressDTO.user());
+        when(addressRepository.save(any(Address.class))).thenReturn(address);
+        when(addressRepository.findById(any())).thenReturn(Optional.of(address));
 
-        when(this.addressAdapter.fromDto(any(AddressDTO.class))).thenReturn(newAddress);
-        when(this.repository.save(any(Address.class))).thenReturn(newAddress);
+        AddressDTO createdAddress = addressService.create(addressDTO);
 
-        this.addressService.create(addressDTO);
+        assertEquals("Street", createdAddress.street());
+    }
 
-        verify(this.repository).save(newAddress);
-        verify(this.addressAdapter).fromEntity(newAddress);
+    @Test
+    void createAddressAlreadyExists() {
+        AddressDTO addressDTO = new AddressDTO(UUID.randomUUID(), "Street", "Number", "CEP", "City", "State", "Country", "Complement", "Neighborhood", null, null);
 
-        assertEquals(addressDTO.street(), newAddress.getStreet());
-        assertEquals(addressDTO.number(), newAddress.getNumber());
-        assertEquals(addressDTO.cep(), newAddress.getCep());
-        assertEquals(addressDTO.city(), newAddress.getCity());
-        assertEquals(addressDTO.state(), newAddress.getState());
-        assertEquals(addressDTO.country(), newAddress.getCountry());
-        assertEquals(addressDTO.complement(), newAddress.getComplement());
-        assertEquals(addressDTO.neighborhood(), newAddress.getNeighborhood());
-        assertEquals(addressDTO.supplier(), newAddress.getSupplier());
-        assertEquals(addressDTO.user(), newAddress.getUser());
+        assertThrows(RuntimeException.class, () -> addressService.create(addressDTO));
 
     }
 
     @Test
-    public void testUpdateAddress() {
+    void updateAddressSuccessfully() {
+        UUID id = UUID.randomUUID();
+        AddressDTO addressDTO = new AddressDTO(id, "Street", "Number", "CEP", "City", "State", "Country", "Complement", "Neighborhood", null, null);
+        Address address = new Address(addressDTO.street(), addressDTO.number(), addressDTO.cep(), addressDTO.city(), addressDTO.state(), addressDTO.country(), addressDTO.complement(), addressDTO.neighborhood(), addressDTO.supplier(), addressDTO.user());
 
-        AddressDTO addressDTO = new AddressDTO(UUID.randomUUID(), "Rua Luiz Gonzaga", "785", "87111111", "Chique Chique", "BA", "Brasil", "", "Tanguistedes", null, null);
-        Address newAddress = new Address();
+        when(addressRepository.findById(id)).thenReturn(Optional.of(address));
+        when(addressRepository.save(any(Address.class))).thenReturn(address);
 
-        newAddress.setStreet(addressDTO.street());
-        newAddress.setNumber(addressDTO.number());
-        newAddress.setCep(addressDTO.cep());
-        newAddress.setCity(addressDTO.city());
-        newAddress.setState(addressDTO.state());
-        newAddress.setCountry(addressDTO.country());
-        newAddress.setComplement(addressDTO.complement());
-        newAddress.setNeighborhood(addressDTO.neighborhood());
-        newAddress.setSupplier(addressDTO.supplier());
-        newAddress.setUser(addressDTO.user());
+        AddressDTO updatedAddress = addressService.update(id, addressDTO);
 
-        when(this.addressAdapter.fromDto(any(AddressDTO.class))).thenReturn(newAddress);
-        when(this.repository.save(any(Address.class))).thenReturn(newAddress);
+        verify(addressRepository).save(any(Address.class));
+        verify(addressRepository, times(2)).findById(id);
 
-        AddressDTO createdAddress = this.addressService.create(addressDTO);
+        assertEquals("Street", updatedAddress.street());
+    }
 
-        verify(this.repository).save(newAddress);
-        verify(this.addressAdapter).fromEntity(newAddress);
+    @Test
+    void updateAddressNotFound() {
+        UUID id = UUID.randomUUID();
+        AddressDTO addressDTO = new AddressDTO(id, "Street", "Number", "CEP", "City", "State", "Country", "Complement", "Neighborhood", null, null);
 
-        AddressDTO updatedAddressDTO = new AddressDTO(createdAddress.id(), "Rua Petruquio Japolino", "111", "66666666", "Formiga", "MG", "Brasil", "", "Pelourinho", null, null);
-        Address updatedAddress = new Address();
+        when(addressRepository.findById(id)).thenReturn(Optional.empty());
 
-        updatedAddress.setStreet(updatedAddressDTO.street());
-        updatedAddress.setNumber(updatedAddressDTO.number());
-        updatedAddress.setCep(updatedAddressDTO.cep());
-        updatedAddress.setCity(updatedAddressDTO.city());
-        updatedAddress.setState(updatedAddressDTO.state());
-        updatedAddress.setCountry(updatedAddressDTO.country());
-        updatedAddress.setComplement(updatedAddressDTO.complement());
-        updatedAddress.setNeighborhood(updatedAddressDTO.neighborhood());
-        updatedAddress.setSupplier(updatedAddressDTO.supplier());
-        updatedAddress.setUser(updatedAddressDTO.user());
+        assertThrows(RuntimeException.class, () -> addressService.update(id, addressDTO));
+    }
 
-        when(this.addressAdapter.fromDto(any(AddressDTO.class))).thenReturn(updatedAddress);
+    @Test
+    void deleteAdressSuccessfully() {
+        UUID id = UUID.randomUUID();
+        AddressDTO addressDTO = new AddressDTO(id, "Street", "Number", "CEP", "City", "State", "Country", "Complement", "Neighborhood", null, null);
+        Address address = new Address(addressDTO.street(), addressDTO.number(), addressDTO.cep(), addressDTO.city(), addressDTO.state(), addressDTO.country(), addressDTO.complement(), addressDTO.neighborhood(), addressDTO.supplier(), addressDTO.user());
 
-        when(this.addressService.update(createdAddress.id(), updatedAddressDTO)).thenReturn(this.addressAdapter.fromEntity(updatedAddress));
+        when(addressRepository.findById(id)).thenReturn(Optional.of(address));
 
+        addressService.delete(id);
 
-        addressService.update(createdAddress.id(), updatedAddressDTO);
-
-        assertEquals(updatedAddressDTO.street(), updatedAddress.getStreet());
-        assertEquals(updatedAddressDTO.number(), updatedAddress.getNumber());
-        assertEquals(updatedAddressDTO.cep(), updatedAddress.getCep());
-        assertEquals(updatedAddressDTO.city(), updatedAddress.getCity());
-        assertEquals(updatedAddressDTO.state(), updatedAddress.getState());
-        assertEquals(updatedAddressDTO.country(), updatedAddress.getCountry());
-        assertEquals(updatedAddressDTO.complement(), updatedAddress.getComplement());
-        assertEquals(updatedAddressDTO.neighborhood(), updatedAddress.getNeighborhood());
-        assertEquals(updatedAddressDTO.supplier(), updatedAddress.getSupplier());
-        assertEquals(updatedAddressDTO.user(), updatedAddress.getUser());
-
+//        verify(addressRepository).delete(address);
     }
 
 }

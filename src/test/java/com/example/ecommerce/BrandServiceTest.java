@@ -1,99 +1,124 @@
-package com.example.ecommerce;
+package com.example.ecommerce.service;
 
-import com.example.ecommerce.adapters.Adapter;
+import com.example.ecommerce.adapters.BrandAdapter;
 import com.example.ecommerce.domain.dto.BrandDTO;
 import com.example.ecommerce.domain.entities.Brand;
-import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.BrandRepository;
-import com.example.ecommerce.service.BrandService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class BrandServiceTest {
 
-    @InjectMocks
+    @Mock
     private BrandService brandService;
 
     @Mock
     private BrandRepository brandRepository;
 
     @Mock
-    private CRUDRepository<Brand, UUID> repository;
-
-    @Mock
-    private Adapter<Brand, BrandDTO> brandAdapter;
+    private BrandAdapter brandAdapter;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        brandRepository = mock(BrandRepository.class);
+        brandAdapter = new BrandAdapter();
+        brandService = new BrandService(brandRepository, brandAdapter, brandRepository);
     }
 
     @Test
-    void testBrandCreate() {
-        BrandDTO brandDTO = new BrandDTO(null, "Bingo", "A new way to search your thoughts", null, null);
-        Brand newBrand = new Brand();
+    void createBrandSuccessfully() {
+        BrandDTO brandDTO = new BrandDTO(UUID.randomUUID(), "BrandName", "Description", null, null);
+        Brand brand = new Brand("BrandName", "Description", null, null);
 
-        newBrand.setId(brandDTO.id());
-        newBrand.setDisplayName(brandDTO.displayName());
-        newBrand.setDescription(brandDTO.description());
-        newBrand.setProductList(brandDTO.productList());
-        newBrand.setImage(brandDTO.image());
+        when(brandRepository.save(any(Brand.class))).thenReturn(brand);
+        when(brandRepository.findByDisplayName(anyString())).thenReturn(Optional.empty());
 
-        when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(newBrand);
-        when(repository.save(any(Brand.class))).thenReturn(newBrand);
-        when(repository.findAll()).thenReturn(Collections.singletonList(newBrand));
+        BrandDTO createdBrand = brandService.create(brandDTO);
 
-        BrandDTO createdBrand = this.brandService.create(brandDTO);
-        List<Brand> allBrands = this.brandService.findAll();
-
-        assertEquals(1, allBrands.size());
-        assertEquals(newBrand, allBrands.get(0));
+        assertNotNull(createdBrand);
+        assertEquals("BrandName", createdBrand.displayName());
     }
 
     @Test
-    void testBrandUpdate() {
-        BrandDTO brandDTO = new BrandDTO(UUID.randomUUID(), "Bingo", "A new way to search your thoughts", null, null);
-        Brand newBrand = new Brand();
+    void createBrandAlreadyExists() {
+        BrandDTO brandDTO = new BrandDTO(UUID.randomUUID(), "BrandName", "Description", null, null);
+        Brand brand = new Brand(brandDTO.displayName(), brandDTO.description(), brandDTO.image(), brandDTO.productList());
 
-        newBrand.setId(brandDTO.id());
-        newBrand.setDisplayName(brandDTO.displayName());
-        newBrand.setDescription(brandDTO.description());
-        newBrand.setProductList(brandDTO.productList());
-        newBrand.setImage(brandDTO.image());
+        when(brandRepository.findByDisplayName(anyString())).thenReturn(Optional.of(brand));
 
-        when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(newBrand);
-        when(repository.save(any(Brand.class))).thenReturn(newBrand);
-        when(repository.findById(brandDTO.id())).thenReturn(Optional.of(newBrand));
-        when(brandService.create(brandDTO)).thenReturn(brandDTO);
+        assertThrows(RuntimeException.class, () -> brandService.create(brandDTO));
+    }
 
-        BrandDTO createdBrandDTO = brandService.create(brandDTO);
-        BrandDTO updateBrandDTO = new BrandDTO(createdBrandDTO.id(), "Guugle", "Open your mind", null, null);
-        Brand updatedBrand = brandAdapter.fromDto(updateBrandDTO);
+    @Test
+    void updateBrandSuccessfully() {
+        UUID id = UUID.randomUUID();
+        BrandDTO brandDTO = new BrandDTO(id, "UpdatedName", "UpdatedDescription", null, null);
+        Brand brand = new Brand(brandDTO.displayName(), brandDTO.description(), brandDTO.image(), brandDTO.productList());
 
-        when(brandAdapter.fromDto(any(BrandDTO.class))).thenReturn(updatedBrand);
-        when(repository.save(any(Brand.class))).thenReturn(updatedBrand);
+        when(brandRepository.findById(id)).thenReturn(Optional.of(brand));
+        when(brandRepository.save(any(Brand.class))).thenReturn(brand);
 
-        BrandDTO result = brandService.update(createdBrandDTO.id(), updateBrandDTO);
+        BrandDTO updatedBrand = brandService.update(id, brandDTO);
 
-        verify(this.repository).save(updatedBrand);
+        verify(brandRepository).save(any(Brand.class));
+        verify(brandRepository, Mockito.times(2)).findById(id);
 
-        assertEquals(updateBrandDTO.displayName(), updatedBrand.getDisplayName());
-        assertEquals(updateBrandDTO.description(), updatedBrand.getDescription());
-        assertEquals(updateBrandDTO.productList(), updatedBrand.getProductList());
+        assertNotNull(updatedBrand);
+        assertEquals("UpdatedName", updatedBrand.displayName());
+    }
+
+    @Test
+    void updateBrandNotFound() {
+        UUID id = UUID.randomUUID();
+        BrandDTO brandDTO = new BrandDTO(id, "UpdatedName", "UpdatedDescription", null, null);
+
+        when(brandRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(RuntimeException.class, () -> brandService.update(id, brandDTO));
+    }
+
+    @Test
+    void deleteBrandSuccessfully() {
+        UUID id = UUID.randomUUID();
+        BrandDTO brandDTO = new BrandDTO(id, "BrandName", "Description", null, null);
+        Brand brand = new Brand(brandDTO.displayName(), brandDTO.description(), brandDTO.image(), brandDTO.productList());
+
+        when(brandRepository.findById(id)).thenReturn(Optional.of(brand));
+
+        brandService.delete(id);
+
+        verify(brandRepository).delete(brand);
+    }
+
+    @Test
+    void findByDisplayNameSuccessfully() {
+        Brand brand = new Brand("BrandName", "Description", null, null);
+
+        when(brandRepository.findByDisplayName("BrandName")).thenReturn(Optional.of(brand));
+
+        Optional<Brand> foundBrand = brandService.findByDisplayName("BrandName");
+
+        assertTrue(foundBrand.isPresent());
+        assertEquals("BrandName", foundBrand.get().getDisplayName());
+    }
+
+    @Test
+    void findByDisplayNameNotFound() {
+        when(brandRepository.findByDisplayName("NonExistentBrand")).thenReturn(Optional.empty());
+
+        Optional<Brand> foundBrand = brandService.findByDisplayName("NonExistentBrand");
+
+        assertFalse(foundBrand.isPresent());
     }
 }

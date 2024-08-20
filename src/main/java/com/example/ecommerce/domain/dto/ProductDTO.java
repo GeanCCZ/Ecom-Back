@@ -28,7 +28,7 @@ public record ProductDTO(
     @NotNull(message = "'Price' must be informed")
     Double price,
 
-    String applicableDiscount,
+    Boolean discountEnabled,
 
     @NotNull(message = "'Stock' must be informed")
     List<Stock> stockList,

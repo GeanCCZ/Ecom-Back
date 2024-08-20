@@ -33,7 +33,7 @@ public class Product extends BaseEntity{
     private Double price;
 
     @Column(name = "applicable_discount",nullable = true,columnDefinition = "Decimal(10,2) default 0.0")
-    private String applicableDiscount;
+    private Boolean discountEnabled;
 
     @OneToMany
     @JoinColumn

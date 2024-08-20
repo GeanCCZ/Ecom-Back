@@ -17,7 +17,6 @@ public abstract class CRUDService<T, ID, DTO>{
     private final Adapter<T, DTO> adapter;
 
     public DTO create(DTO dto){
-
         T newEntity = this.getEntityFromDTO(dto);
 
         DTO createdRegister = this.getDTOFromEntity(repository.save(newEntity));
@@ -26,11 +25,9 @@ public abstract class CRUDService<T, ID, DTO>{
     }
 
     public DTO update(ID id,DTO dto){
-        System.out.println(id + "ID: " + this.findById(id));
         if(this.findById(id) == null){
             throw new RuntimeException("Register not found");
         }
-
         T updatedEntity = this.getEntityFromDTO(dto);
 
         return  this.getDTOFromEntity(this.repository.save(updatedEntity));

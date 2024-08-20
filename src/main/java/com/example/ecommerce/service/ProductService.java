@@ -54,6 +54,8 @@ public class ProductService extends CRUDService<Product, UUID, ProductDTO>{
             }
             dto.stockList().clear();
             dto.stockList().addAll(stockList);
+        } else {
+            throw new RuntimeException("Stock list is empty");
         }
 
         if (this.brandService.findByDisplayName(dto.brand().getDisplayName()).isEmpty()){

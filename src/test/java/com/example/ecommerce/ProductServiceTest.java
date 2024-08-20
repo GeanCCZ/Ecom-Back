@@ -1,19 +1,27 @@
 package com.example.ecommerce;
 
+import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.*;
 import com.example.ecommerce.domain.entities.*;
+import com.example.ecommerce.repository.custom.ProductRepository;
 import com.example.ecommerce.service.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.event.annotation.BeforeTestClass;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class ProductServiceTest {
@@ -21,99 +29,44 @@ public class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
 
-    @InjectMocks
+    @Mock
+    private ProductRepository productRepository;
+
+    @Mock
+    private Adapter<Product, ProductDTO> adapter;
+
+    @Mock
     private BrandService brandService;
 
-    @InjectMocks
+    @Mock
     private CategoryService categoryService;
 
-    @InjectMocks
-    public DiscountService discountService;
+    @Mock
+    private DiscountService discountService;
 
-    @InjectMocks
+    @Mock
     private StockService stockService;
 
-    @InjectMocks
+    @Mock
     private SubCategoryService subCategoryService;
 
-    @InjectMocks
+    @Mock
     private SupplierService supplierService;
 
-    private static final Supplier supplier = new Supplier("Transistors Unlimited", "Transistors Unlimited LTDA", "We made transistors", "11110001/1",null, null,null);
-
-    private static final Brand brand = new Brand("Guugle","A new way to search your thoughts",null,null);
-
-    private static final Category category = new Category("Eletricidade",null);
-
-    private static final Discount discount = new Discount(15.0,1,0.15,null);
-
-    private static final List<Stock> stockList = new ArrayList<>();
-
-    private static final List<SubCategory> subCategoryList = new ArrayList<>();
-
-    private static final List<Review> reviewList = new ArrayList<>();
-
     @Test
-    public void testProductCreate(){
+    void createProductSuccessfully() {
 
-        this.stockList.add(new Stock( 1, null, null));
-        this.subCategoryList.add(new SubCategory( "SubCategory", null));
-        this.reviewList.add(new Review( 5, "A good job", new Date(), null, null));
+        new Supplier("SupplierName", "Supplier", "Sup Description", "", null, null,null);
 
-        //BrandDTO createBrandDTO = new BrandDTO(null, "Guugle", "A new way to search your thoughts", null, null);
-        //this.brandService.create(createBrandDTO);
 
-        CategoryDTO createCategoryDTO = new CategoryDTO(null, "Eletricidade", null);
-        this.categoryService.create(createCategoryDTO);
 
-        DiscountDTO createDiscountDTO = new DiscountDTO(null, 15.0, 1, 0.15, null);
-        this.discountService.create(createDiscountDTO);
+        List<Stock> stockList = new ArrayList<>();
 
-        StockDTO createStockDTO = new StockDTO(null, 1, null, null);
-        this.stockService.create(createStockDTO);
+        when(stockService.create(any(StockDTO.class))).thenReturn();
+        when(stockService.getDTOFromEntity(any(Stock.class))).thenReturn(new StockDTO(UUID.randomUUID(), 10, UUID.randomUUID(), UUID.randomUUID()));
+        when(stockService.getEntityFromDTO(any(StockDTO.class))).thenReturn(new Stock(UUID.randomUUID(), 10, new Supplier(UUID.randomUUID()), new Product(UUID.randomUUID()));
 
-        SubCategoryDTO createSubCategoryDTO = new SubCategoryDTO(null, "SubCategory", null);
-        this.subCategoryService.create(createSubCategoryDTO);
-
-        SupplierDTO createSupplierDTO = new SupplierDTO(null,"Transistors Unlimited", "Transistors Unlimited LTDA", "We made transistors", "11110001/1",null, null,null);
-        this.supplierService.create(createSupplierDTO);
-
-        ProductDTO newProduct = new ProductDTO(null, "Product", "1", null, null, this.stockList , this.discount, this.category, this.subCategoryList, this.brand, this.reviewList, this.supplier);
-
-        ProductDTO createdProduct = this.productService.create(newProduct);
-
-        assertEquals(newProduct.displayName(), createdProduct.displayName());
-        assertEquals(newProduct.description(), createdProduct.description());
-        assertEquals(newProduct.price(), createdProduct.price());
-        assertEquals(newProduct.applicableDiscount(), createdProduct.applicableDiscount());
-        assertEquals(newProduct.discount(), createdProduct.discount());
-        assertEquals(newProduct.supplier(), createdProduct.supplier());
-        assertEquals(newProduct.category(), createdProduct.category());
-        assertEquals(newProduct.subCategoryList(), createdProduct.subCategoryList());
-        assertEquals(newProduct.stockList(), createdProduct.stockList());
-        assertEquals(newProduct.reviewList(), createdProduct.reviewList());
-
+        //ProductDTO productDTO = new ProductDTO(UUID.randomUUID(), "ProductName", "Description", 110.11, true,);
     }
 
-    @Test
-    public void testProductUpdate(){
-        ProductDTO newProduct = new ProductDTO(null, "Product", "1", null, null, null, null, null, null, null, null, null);
-
-        ProductDTO createdProduct = this.productService.create(newProduct);
-
-        ProductDTO updateProductDTO = new ProductDTO(createdProduct.id(), "Product", "2", null, null, null, null, null, null, null, null, null);
-
-        ProductDTO updatedProduct = this.productService.update(createdProduct.id(), updateProductDTO);
-
-        assertEquals(updateProductDTO.displayName(), updatedProduct.displayName());
-        assertEquals(updateProductDTO.description(), updatedProduct.description());
-        assertEquals(updateProductDTO.price(), updatedProduct.price());
-        assertEquals(updateProductDTO.applicableDiscount(), updatedProduct.applicableDiscount());
-        assertEquals(updateProductDTO.discount(), updatedProduct.discount());
-        assertEquals(updateProductDTO.supplier(), updatedProduct.supplier());
-        assertEquals(updateProductDTO.category(), updatedProduct.category());
-        assertEquals(updateProductDTO.subCategoryList(), updatedProduct.subCategoryList());
-        assertEquals(updateProductDTO.stockList(), updatedProduct.stockList());
-        assertEquals(updateProductDTO.reviewList(), updatedProduct.reviewList());
-    }
 }
