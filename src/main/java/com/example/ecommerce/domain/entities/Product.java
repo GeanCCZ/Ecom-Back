@@ -53,7 +53,7 @@ public class Product extends BaseEntity{
 
     @OneToMany
     @JoinColumn(name="sub_category")
-    private List<SubCategory> subCategory;
+    private List<SubCategory> subCategoryList;
 
     @OneToOne
     @JoinColumn

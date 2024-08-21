@@ -28,7 +28,7 @@ public class SubCategoryService extends CRUDService<SubCategory, UUID, SubCatego
         }
     }
 
-    protected Optional<SubCategory> findByDisplayName(String displayName){
+    public Optional<SubCategory> findByDisplayName(String displayName){
         return this.subCategoryRepository.findByDisplayName(displayName);
     };
 

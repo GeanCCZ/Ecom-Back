@@ -28,11 +28,11 @@ public class SupplierService extends CRUDService<Supplier, UUID, SupplierDTO>{
         }
     }
 
-    protected Optional<Supplier> findByTradeName(String tradeName){
+    public Optional<Supplier> findByTradeName(String tradeName){
         return this.supplierRepository.findByTradeName(tradeName);
     }
 
-    protected Optional<Supplier> findByLegalName(String legalName){
+    public Optional<Supplier> findByLegalName(String legalName){
         return this.supplierRepository.findByLegalName(legalName);
     }
 

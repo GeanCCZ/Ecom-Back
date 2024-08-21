@@ -28,7 +28,7 @@ public class CategoryService extends  CRUDService<Category,UUID, CategoryDTO>{
         }
     }
 
-    protected Optional<Category> findByDisplayName(String displayName){
+    public Optional<Category> findByDisplayName(String displayName){
         return this.categoryRepository.findByDisplayName(displayName);
     }
 

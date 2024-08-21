@@ -28,7 +28,7 @@ public class BrandService extends CRUDService<Brand, UUID, BrandDTO>{
         }
     }
 
-    protected Optional<Brand> findByDisplayName(String displayName){
+    public Optional<Brand> findByDisplayName(String displayName){
         return this.brandRepository.findByDisplayName(displayName);
     }
 }
