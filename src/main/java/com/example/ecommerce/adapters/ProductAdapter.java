@@ -37,7 +37,7 @@ public class ProductAdapter implements Adapter<Product, ProductDTO> {
                 entity.getStockList(),
                 entity.getDiscount(),
                 entity.getCategory(),
-                entity.getSubCategory(),
+                entity.getSubCategoryList(),
                 entity.getBrand(),
                 entity.getReviewList(),
                 entity.getSupplier()

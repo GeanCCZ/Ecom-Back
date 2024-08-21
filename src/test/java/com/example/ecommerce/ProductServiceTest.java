@@ -5,22 +5,15 @@ import com.example.ecommerce.domain.dto.*;
 import com.example.ecommerce.domain.entities.*;
 import com.example.ecommerce.repository.custom.ProductRepository;
 import com.example.ecommerce.service.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.internal.matchers.InstanceOf;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -66,22 +59,70 @@ public class ProductServiceTest {
 
     @Test
     void createProductSuccessfully() {
-//        SupplierDTO supplierDTO = new SupplierDTO(UUID.randomUUID(), "SupplierName", "Supplier", "Sup Description", "", null, null, null);
-//
-//        Supplier productSupplier = supplierAdapter.fromDto(supplierDTO);
-//
-//        when(supplierService.create(supplierDTO)).thenReturn(supplierDTO);
-//
-//        Stock productStock = new Stock(100, productSupplier, null);
-//        List<Stock> stockList = new ArrayList<>() {{
-//            add(productStock);
-//        }};
+        SupplierDTO supplierDTO = new SupplierDTO(UUID.randomUUID(), "SupplierName", "Supplier", "Sup Description", "", null, null, null);
 
-//        when(stockService.create(any(StockDTO.class))).thenReturn();
-//        when(stockService.getDTOFromEntity(any(Stock.class))).thenReturn(new StockDTO(UUID.randomUUID(), 10, UUID.randomUUID(), UUID.randomUUID()));
-//        when(stockService.getEntityFromDTO(any(StockDTO.class))).thenReturn(new Stock(UUID.randomUUID(), 10, new Supplier(UUID.randomUUID()), new Product(UUID.randomUUID()));
+        Supplier productSupplier = new Supplier(supplierDTO.tradeName(),supplierDTO.legalName(),supplierDTO.description(),supplierDTO.cnpj(),supplierDTO.addressList(),supplierDTO.stockList(),supplierDTO.productList());
 
-        //ProductDTO productDTO = new ProductDTO(UUID.randomUUID(), "ProductName", "Description", 110.11, true,);
+        when(supplierService.create(supplierDTO)).thenReturn(supplierDTO);
+
+        supplierService.create(supplierDTO);
+
+        when(supplierService.findByLegalName(supplierDTO.legalName())).thenReturn(Optional.ofNullable(productSupplier));
+
+        Stock productStock = new Stock(100, productSupplier, null);
+        List<Stock> stockList = new ArrayList<>() {{
+            add(productStock);
+        }};
+
+        DiscountDTO discountDTO = new DiscountDTO(UUID.randomUUID(), 10.0, 1, 0.10, null);
+
+        Discount productDiscount = discountAdapter.fromDto(discountDTO);
+
+        when(discountService.create(discountDTO)).thenReturn(discountDTO);
+
+        CategoryDTO categoryDTO = new CategoryDTO(UUID.randomUUID(), "CategoryName", null);
+
+        Category productCategory = new Category(categoryDTO.displayName(), categoryDTO.productList());
+
+        when(categoryService.create(categoryDTO)).thenReturn(categoryDTO);
+
+        when(categoryService.findByDisplayName(categoryDTO.displayName())).thenReturn(Optional.ofNullable(productCategory));
+
+        SubCategoryDTO subCategoryDTO = new SubCategoryDTO(UUID.randomUUID(), "SubCategoryName", null);
+
+        SubCategory productSubCategory = new SubCategory(subCategoryDTO.displayName(), subCategoryDTO.productList());
+
+        when(subCategoryService.create(subCategoryDTO)).thenReturn(subCategoryDTO);
+
+        when(subCategoryService.findByDisplayName(subCategoryDTO.displayName())).thenReturn(Optional.ofNullable(productSubCategory));
+
+        List<SubCategory> subCategoryList = new ArrayList<>() {{
+            add(productSubCategory);
+        }};
+
+        BrandDTO brandDTO = new BrandDTO(UUID.randomUUID(), "BrandName", "", null, null);
+        Brand productBrand = new Brand(brandDTO.displayName(),brandDTO.description(),brandDTO.image(),brandDTO.productList());
+
+        when(brandService.findByDisplayName(brandDTO.displayName())).thenReturn(Optional.empty());
+
+        when(brandService.create(brandDTO)).thenReturn(brandDTO);
+
+        brandService.create(brandDTO);
+
+        when(brandService.findByDisplayName(brandDTO.displayName())).thenReturn(Optional.ofNullable(productBrand));
+        ProductDTO productDTO = new ProductDTO(UUID.randomUUID(), "ProductName", "Description", 110.11, true, stockList, productDiscount, productCategory, subCategoryList, productBrand, new ArrayList<>(), productSupplier);
+
+        Product product = new Product(productDTO.displayName(),productDTO.description(),productDTO.price(),productDTO.discountEnabled(),productDTO.stockList(),productDTO.discount(),null,productDTO.category(),productDTO.subCategoryList(),productDTO.brand(),productDTO.reviewList(),productDTO.supplier());
+
+        when(productService.create(productDTO)).thenReturn(productDTO);
+
+        productService.create(productDTO);
+
+        when(productRepository.findAll()).thenReturn(Collections.singletonList(product));
+        when(productRepository.save(product)).thenReturn(product);
+
+        verify(productRepository).save(product);
+        verify(productRepository).findAll();
     }
 
 }
