@@ -8,12 +8,9 @@ import com.example.ecommerce.service.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.internal.matchers.InstanceOf;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.*;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
