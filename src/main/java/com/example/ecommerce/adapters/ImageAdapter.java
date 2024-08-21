@@ -1,6 +1,7 @@
 package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.ImageDTO;
+import com.example.ecommerce.domain.dto.SupplierDTO;
 import com.example.ecommerce.domain.entities.Image;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class ImageAdapter implements Adapter<Image, ImageDTO> {
     }
 
     @Override
-    public ImageDTO fromEntity(Image entity) {
+    public SupplierDTO fromEntity(Image entity) {
         return new ImageDTO(
                 entity.getId(),
                 entity.getPublicId(),

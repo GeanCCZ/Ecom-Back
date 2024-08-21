@@ -1,6 +1,7 @@
 package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.ProductDTO;
+import com.example.ecommerce.domain.dto.SupplierDTO;
 import com.example.ecommerce.domain.entities.Product;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class ProductAdapter implements Adapter<Product, ProductDTO> {
     }
 
     @Override
-    public ProductDTO fromEntity(Product entity) {
+    public SupplierDTO fromEntity(Product entity) {
         return new ProductDTO(
                 entity.getId(),
                 entity.getDisplayName(),

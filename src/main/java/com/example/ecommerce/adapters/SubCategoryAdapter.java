@@ -1,6 +1,7 @@
 package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.SubCategoryDTO;
+import com.example.ecommerce.domain.dto.SupplierDTO;
 import com.example.ecommerce.domain.entities.SubCategory;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class SubCategoryAdapter implements Adapter<SubCategory, SubCategoryDTO> 
     }
 
     @Override
-    public SubCategoryDTO fromEntity(SubCategory entity) {
+    public SupplierDTO fromEntity(SubCategory entity) {
         return new SubCategoryDTO(
                 entity.getId(),
                 entity.getDisplayName(),

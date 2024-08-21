@@ -1,6 +1,7 @@
 package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.ReviewDTO;
+import com.example.ecommerce.domain.dto.SupplierDTO;
 import com.example.ecommerce.domain.entities.Review;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class ReviewAdapter implements Adapter<Review, ReviewDTO> {
     }
 
     @Override
-    public ReviewDTO fromEntity(Review entity) {
+    public SupplierDTO fromEntity(Review entity) {
         return new ReviewDTO(
                 entity.getId(),
                 entity.getAvaliationValue(),

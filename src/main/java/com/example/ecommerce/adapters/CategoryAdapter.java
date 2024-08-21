@@ -1,6 +1,7 @@
 package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.CategoryDTO;
+import com.example.ecommerce.domain.dto.SupplierDTO;
 import com.example.ecommerce.domain.entities.Category;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ public class CategoryAdapter implements Adapter<Category, CategoryDTO>{
         return new Category(dto.displayName(), dto.productList());
     }
 
-    public CategoryDTO fromEntity(Category entity) {
+    public SupplierDTO fromEntity(Category entity) {
         return new CategoryDTO(entity.getId(),entity.getDisplayName(),entity.getProductList());
     }
 

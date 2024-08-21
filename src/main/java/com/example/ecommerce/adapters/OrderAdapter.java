@@ -1,6 +1,7 @@
 package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.OrderDTO;
+import com.example.ecommerce.domain.dto.SupplierDTO;
 import com.example.ecommerce.domain.entities.Order;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class OrderAdapter implements Adapter<Order, OrderDTO> {
     }
 
     @Override
-    public OrderDTO fromEntity(Order entity) {
+    public SupplierDTO fromEntity(Order entity) {
         return new OrderDTO(
                 entity.getId(),
                 entity.isParcel(),

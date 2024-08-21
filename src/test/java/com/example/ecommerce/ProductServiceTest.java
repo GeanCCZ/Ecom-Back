@@ -30,41 +30,56 @@ public class ProductServiceTest {
     private ProductService productService;
 
     @Mock
+    private Adapter<Product, ProductDTO> productAdapter;
+    @Mock
     private ProductRepository productRepository;
 
     @Mock
-    private Adapter<Product, ProductDTO> adapter;
-
+    private Adapter<Brand, BrandDTO> brandAdapter;
     @Mock
     private BrandService brandService;
 
     @Mock
+    private Adapter<Category, CategoryDTO> categoryAdapter;
+    @Mock
     private CategoryService categoryService;
 
+    @Mock
+    private Adapter<Discount, DiscountDTO> discountAdapter;
     @Mock
     private DiscountService discountService;
 
     @Mock
+    private Adapter<Stock, StockDTO> stockAdapter;
+    @Mock
     private StockService stockService;
 
     @Mock
+    private Adapter<SubCategory, SubCategoryDTO> subCategoryAdapter;
+    @Mock
     private SubCategoryService subCategoryService;
 
+    @Mock
+    private Adapter<Supplier, SupplierDTO> supplierAdapter;
     @Mock
     private SupplierService supplierService;
 
     @Test
     void createProductSuccessfully() {
+        SupplierDTO supplierDTO = new SupplierDTO(UUID.randomUUID(), "SupplierName", "Supplier", "Sup Description", "", null, null, null);
 
-        new Supplier("SupplierName", "Supplier", "Sup Description", "", null, null,null);
+        Supplier productSupplier = supplierAdapter.fromDto(supplierDTO);
 
+        when(supplierService.create(supplierDTO)).thenReturn(supplierDTO);
 
+        Stock productStock = new Stock(100, productSupplier, null);
+        List<Stock> stockList = new ArrayList<>() {{
+            add(productStock);
+        }};
 
-        List<Stock> stockList = new ArrayList<>();
-
-        when(stockService.create(any(StockDTO.class))).thenReturn();
-        when(stockService.getDTOFromEntity(any(Stock.class))).thenReturn(new StockDTO(UUID.randomUUID(), 10, UUID.randomUUID(), UUID.randomUUID()));
-        when(stockService.getEntityFromDTO(any(StockDTO.class))).thenReturn(new Stock(UUID.randomUUID(), 10, new Supplier(UUID.randomUUID()), new Product(UUID.randomUUID()));
+//        when(stockService.create(any(StockDTO.class))).thenReturn();
+//        when(stockService.getDTOFromEntity(any(Stock.class))).thenReturn(new StockDTO(UUID.randomUUID(), 10, UUID.randomUUID(), UUID.randomUUID()));
+//        when(stockService.getEntityFromDTO(any(StockDTO.class))).thenReturn(new Stock(UUID.randomUUID(), 10, new Supplier(UUID.randomUUID()), new Product(UUID.randomUUID()));
 
         //ProductDTO productDTO = new ProductDTO(UUID.randomUUID(), "ProductName", "Description", 110.11, true,);
     }

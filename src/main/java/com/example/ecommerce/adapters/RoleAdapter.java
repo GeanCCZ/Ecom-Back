@@ -1,6 +1,7 @@
 package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.RoleDTO;
+import com.example.ecommerce.domain.dto.SupplierDTO;
 import com.example.ecommerce.domain.entities.Role;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class RoleAdapter implements Adapter<Role, RoleDTO> {
     }
 
     @Override
-    public RoleDTO fromEntity(Role entity) {
+    public SupplierDTO fromEntity(Role entity) {
         return new RoleDTO(
                 entity.getId(),
                 entity.getDisplayName(),
