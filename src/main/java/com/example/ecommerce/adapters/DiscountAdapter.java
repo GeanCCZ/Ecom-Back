@@ -14,7 +14,7 @@ public class DiscountAdapter implements Adapter<Discount, DiscountDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(Discount entity) {
+    public DiscountDTO fromEntity(Discount entity) {
         return new DiscountDTO(entity.getId(),entity.getPresentedValue(),entity.getType(),entity.getFinalValue(),entity.getProductList());
     }
 

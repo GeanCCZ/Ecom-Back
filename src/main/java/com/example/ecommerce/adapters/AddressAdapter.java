@@ -24,7 +24,7 @@ public class AddressAdapter implements Adapter<Address, AddressDTO>{
     }
 
     @Override
-    public SupplierDTO fromEntity(Address entity) {
+    public AddressDTO fromEntity(Address entity) {
         return new AddressDTO(
                 entity.getId(),
                 entity.getStreet(),

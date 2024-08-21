@@ -22,7 +22,7 @@ public class OrderAdapter implements Adapter<Order, OrderDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(Order entity) {
+    public OrderDTO fromEntity(Order entity) {
         return new OrderDTO(
                 entity.getId(),
                 entity.isParcel(),

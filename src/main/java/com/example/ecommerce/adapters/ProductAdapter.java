@@ -27,7 +27,7 @@ public class ProductAdapter implements Adapter<Product, ProductDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(Product entity) {
+    public ProductDTO fromEntity(Product entity) {
         return new ProductDTO(
                 entity.getId(),
                 entity.getDisplayName(),

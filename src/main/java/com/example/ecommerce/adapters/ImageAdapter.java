@@ -24,7 +24,7 @@ public class ImageAdapter implements Adapter<Image, ImageDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(Image entity) {
+    public ImageDTO fromEntity(Image entity) {
         return new ImageDTO(
                 entity.getId(),
                 entity.getPublicId(),

@@ -18,7 +18,7 @@ public class StockAdapter implements Adapter<Stock, StockDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(Stock entity) {
+    public StockDTO fromEntity(Stock entity) {
         return new StockDTO(
                 entity.getId(),
                 entity.getQuantity(),

@@ -20,7 +20,7 @@ public class RootGroupAdapter implements Adapter<RootGroup, RootGroupDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(RootGroup entity) {
+    public RootGroupDTO fromEntity(RootGroup entity) {
         return new RootGroupDTO(
                 entity.getId(),
                 entity.getDisplayName(),

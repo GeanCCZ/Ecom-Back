@@ -25,7 +25,7 @@ public class UserAdapter implements Adapter<User, UserDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(User entity) {
+    public UserDTO fromEntity(User entity) {
         return new UserDTO(
                 entity.getId(),
                 entity.getAddresses(),

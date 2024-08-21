@@ -17,7 +17,7 @@ public class SubCategoryAdapter implements Adapter<SubCategory, SubCategoryDTO> 
     }
 
     @Override
-    public SupplierDTO fromEntity(SubCategory entity) {
+    public SubCategoryDTO fromEntity(SubCategory entity) {
         return new SubCategoryDTO(
                 entity.getId(),
                 entity.getDisplayName(),

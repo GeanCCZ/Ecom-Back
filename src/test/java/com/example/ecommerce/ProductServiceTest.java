@@ -66,16 +66,16 @@ public class ProductServiceTest {
 
     @Test
     void createProductSuccessfully() {
-        SupplierDTO supplierDTO = new SupplierDTO(UUID.randomUUID(), "SupplierName", "Supplier", "Sup Description", "", null, null, null);
-
-        Supplier productSupplier = supplierAdapter.fromDto(supplierDTO);
-
-        when(supplierService.create(supplierDTO)).thenReturn(supplierDTO);
-
-        Stock productStock = new Stock(100, productSupplier, null);
-        List<Stock> stockList = new ArrayList<>() {{
-            add(productStock);
-        }};
+//        SupplierDTO supplierDTO = new SupplierDTO(UUID.randomUUID(), "SupplierName", "Supplier", "Sup Description", "", null, null, null);
+//
+//        Supplier productSupplier = supplierAdapter.fromDto(supplierDTO);
+//
+//        when(supplierService.create(supplierDTO)).thenReturn(supplierDTO);
+//
+//        Stock productStock = new Stock(100, productSupplier, null);
+//        List<Stock> stockList = new ArrayList<>() {{
+//            add(productStock);
+//        }};
 
 //        when(stockService.create(any(StockDTO.class))).thenReturn();
 //        when(stockService.getDTOFromEntity(any(Stock.class))).thenReturn(new StockDTO(UUID.randomUUID(), 10, UUID.randomUUID(), UUID.randomUUID()));

@@ -12,7 +12,7 @@ public class CategoryAdapter implements Adapter<Category, CategoryDTO>{
         return new Category(dto.displayName(), dto.productList());
     }
 
-    public SupplierDTO fromEntity(Category entity) {
+    public CategoryDTO fromEntity(Category entity) {
         return new CategoryDTO(entity.getId(),entity.getDisplayName(),entity.getProductList());
     }
 

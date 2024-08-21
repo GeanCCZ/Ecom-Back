@@ -20,7 +20,7 @@ public class ReviewAdapter implements Adapter<Review, ReviewDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(Review entity) {
+    public ReviewDTO fromEntity(Review entity) {
         return new ReviewDTO(
                 entity.getId(),
                 entity.getAvaliationValue(),

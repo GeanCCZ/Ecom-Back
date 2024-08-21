@@ -19,7 +19,7 @@ public class OrderItemAdapter implements Adapter<OrderItem, OrderItemDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(OrderItem entity) {
+    public OrderItemDTO fromEntity(OrderItem entity) {
         return new OrderItemDTO(
                 entity.getId(),
                 entity.getProduct(),

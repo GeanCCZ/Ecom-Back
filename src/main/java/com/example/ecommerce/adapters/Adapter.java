@@ -8,6 +8,6 @@ public interface Adapter<T, DTO> {
 
     T fromDto(DTO dto);
 
-    SupplierDTO fromEntity(T entity);
+    DTO fromEntity(T entity);
 
 }

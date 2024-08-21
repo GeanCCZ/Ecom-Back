@@ -14,7 +14,7 @@ public class BrandAdapter implements Adapter<Brand, BrandDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(Brand entity) {
+    public BrandDTO fromEntity(Brand entity) {
         return new BrandDTO(entity.getId(),entity.getDisplayName(), entity.getDescription(), entity.getImage(), entity.getProductList());
     }
 

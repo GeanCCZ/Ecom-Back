@@ -17,7 +17,7 @@ public class RoleAdapter implements Adapter<Role, RoleDTO> {
     }
 
     @Override
-    public SupplierDTO fromEntity(Role entity) {
+    public RoleDTO fromEntity(Role entity) {
         return new RoleDTO(
                 entity.getId(),
                 entity.getDisplayName(),
