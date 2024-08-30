@@ -6,12 +6,14 @@ import com.example.ecommerce.domain.dto.UserDTO;
 import com.example.ecommerce.domain.entities.UserAuth;
 import com.example.ecommerce.repository.custom.UserRepository;
 import com.example.ecommerce.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
 
     private final UserRepository userRepository;
@@ -22,12 +24,6 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, UserService userService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
-        this.userService = userService;
-    }
 
     public GenericSucessfulOperation<UserAuthDTO> signUp(UserDTO userDTO) {
 

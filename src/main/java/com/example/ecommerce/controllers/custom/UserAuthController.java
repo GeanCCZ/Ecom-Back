@@ -34,10 +34,10 @@ public class UserAuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<LoginResponse> signIn(@RequestBody UserAuthDTO userAuthDTO) {
-        System.out.println("jwtToken");
         UserAuth authenticatedUser = this.authService.signIn(userAuthDTO);
 
         String jwtToken = this.jwtService.generateToken(authenticatedUser);
+
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setToken(jwtToken);
         loginResponse.setExpiresIn(jwtService.getExpirationTime());

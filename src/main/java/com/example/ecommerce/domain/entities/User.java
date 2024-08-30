@@ -1,5 +1,6 @@
 package com.example.ecommerce.domain.entities;
 
+import jakarta.annotation.Nullable;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.Column;
@@ -58,6 +59,9 @@ public class User extends BaseEntity {
 
     @Column(name = "password")
     private String password;
+
+    @Nullable
+    boolean enabled;
 
     @CreationTimestamp
     @Column(name = "created_at")
