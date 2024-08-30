@@ -4,7 +4,6 @@ import com.example.ecommerce.domain.dto.UserDTO;
 import com.example.ecommerce.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,7 +27,7 @@ public class UserServiceTest {
         assertEquals(newUser.password(), createdUser.password());
         assertEquals(newUser.role(), createdUser.role());
         assertEquals(newUser.addresses(), createdUser.addresses());
-        assertEquals(newUser.orders(), createdUser.orders());
+        assertEquals(newUser.orderList(), createdUser.orderList());
         assertEquals(newUser.reviewList(), createdUser.reviewList());
     }
 
@@ -49,7 +48,7 @@ public class UserServiceTest {
         assertEquals(updateUserDTO.password(), updatedUser.password());
         assertEquals(updateUserDTO.role(), updatedUser.role());
         assertEquals(updateUserDTO.addresses(), updatedUser.addresses());
-        assertEquals(updateUserDTO.orders(), updatedUser.orders());
+        assertEquals(updateUserDTO.orderList(), updatedUser.orderList());
         assertEquals(updateUserDTO.reviewList(), updatedUser.reviewList());
 
     }

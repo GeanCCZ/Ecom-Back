@@ -1,6 +1,5 @@
 package com.example.ecommerce.adapters;
 
-import com.example.ecommerce.domain.dto.SupplierDTO;
 import com.example.ecommerce.domain.dto.UserDTO;
 import com.example.ecommerce.domain.entities.User;
 import org.springframework.stereotype.Service;
@@ -14,13 +13,15 @@ public class UserAdapter implements Adapter<User, UserDTO> {
                 dto.addresses(),
                 dto.role(),
                 dto.image(),
-                dto.orders(),
+                dto.orderList(),
                 dto.reviewList(),
                 dto.firstName(),
                 dto.lastName(),
                 dto.email(),
                 dto.phone(),
-                dto.password()
+                dto.password(),
+                dto.enabled(),
+                dto.createdAt()
         );
     }
 
@@ -37,7 +38,9 @@ public class UserAdapter implements Adapter<User, UserDTO> {
                 entity.getLastName(),
                 entity.getEmail(),
                 entity.getPhone(),
-                entity.getPassword()
+                entity.getPassword(),
+                entity.isEnabled(),
+                entity.getCreatedAt()
         );
     }
 }

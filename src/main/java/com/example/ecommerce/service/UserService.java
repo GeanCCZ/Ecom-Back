@@ -7,6 +7,7 @@ import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,6 +26,10 @@ public class UserService extends CRUDService<User, UUID, UserDTO>{
         if(alreadyExists){
             throw new RuntimeException();
         }
+    }
+
+    public Optional<User> findByEmail(String email){
+        return Optional.of(this.userRepository.findByEmail(email).orElseThrow());
     }
 
 }

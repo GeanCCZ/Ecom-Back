@@ -6,8 +6,10 @@ import com.example.ecommerce.domain.entities.Order;
 import com.example.ecommerce.domain.entities.Review;
 import com.example.ecommerce.domain.entities.Role;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +26,7 @@ public record UserDTO(
 
     Image image,
 
-    List<Order> orders,
+    List<Order> orderList,
 
     List<Review> reviewList,
 
@@ -41,6 +43,12 @@ public record UserDTO(
     String phone,
 
     @NotNull(message = "'Password' must be informed")
-    String password
+    String password,
+
+    @Nullable
+    boolean enabled,
+
+    @Nullable
+    Date createdAt
 
 ) {}

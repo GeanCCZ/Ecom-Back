@@ -124,20 +124,20 @@ public class ProductServiceTest {
 
     }
 
-//    @Test
-//    void updateProductSuccessfully(){
-//        UUID id = UUID.randomUUID();
-//        ProductDTO productDTO = new ProductDTO(id, "ProductName", "Description", 110.11, true, null, null, null, null, null, null, null);
-//        Product product = new Product(productDTO.displayName(),productDTO.description(),productDTO.price(),productDTO.discountEnabled(),productDTO.stockList(),productDTO.discount(),null,productDTO.category(),productDTO.subCategoryList(),productDTO.brand(),productDTO.reviewList(),productDTO.supplier());
-//
-//        when(productRepository.findById(id)).thenReturn(Optional.of(product));
-//        when(service.findById(id)).thenReturn(product);
-//
-//        productService.update(id, productDTO);
-//
-//        verify(productRepository).save(product);
-//
-//    }
+    @Test
+    void updateProductSuccessfully(){
+        UUID id = UUID.randomUUID();
+        ProductDTO productDTO = new ProductDTO(id, "ProductName", "Description", 110.11, true, null, null, null, null, null, null, null);
+        Product product = new Product(productDTO.displayName(),productDTO.description(),productDTO.price(),productDTO.discountEnabled(),productDTO.stockList(),productDTO.discount(),null,productDTO.category(),productDTO.subCategoryList(),productDTO.brand(),productDTO.reviewList(),productDTO.supplier());
+
+        when(productRepository.findById(id)).thenReturn(Optional.of(product));
+        when(service.findById(id)).thenReturn(product);
+
+        productService.update(id, productDTO);
+
+        verify(productRepository).save(product);
+
+    }
 
     @Test
     void deleteBrandSuccessfully() {
