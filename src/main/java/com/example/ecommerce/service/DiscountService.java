@@ -5,6 +5,7 @@ import com.example.ecommerce.domain.dto.DiscountDTO;
 import com.example.ecommerce.domain.entities.Discount;
 import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.DiscountRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -26,12 +27,14 @@ public class DiscountService extends CRUDService<Discount, UUID, DiscountDTO> {
     protected void checkSave(DiscountDTO dto, Discount entity){
         boolean alreadyExists = this.discountRepository.findById(dto.id()).isPresent();
         if(alreadyExists){
-            throw new RuntimeException();
+            throw new ObjectNotFoundException(dto.getClass(), "Discount");
         }
     }
 
+    @Override
     protected Discount getEntityFromDTO(DiscountDTO dto){ return this.adapter.fromDto(dto); }
 
+    @Override
     protected DiscountDTO getDTOFromEntity(Discount entity){ return this.adapter.fromEntity(entity); }
 
 }
