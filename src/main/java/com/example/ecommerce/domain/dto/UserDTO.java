@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+
 public record UserDTO(
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -50,5 +51,5 @@ public record UserDTO(
 
     @Nullable
     Date createdAt
-
-) {}
+) {
+}

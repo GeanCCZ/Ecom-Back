@@ -1,6 +1,5 @@
 package com.example.ecommerce.adapters;
 
-import com.example.ecommerce.domain.dto.SupplierDTO;
 import org.springframework.stereotype.Service;
 
 @Service

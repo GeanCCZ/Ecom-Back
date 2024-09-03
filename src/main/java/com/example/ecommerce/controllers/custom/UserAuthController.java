@@ -1,10 +1,8 @@
 package com.example.ecommerce.controllers.custom;
 
-import com.example.ecommerce.domain.dto.GenericSucessfulOperation;
-import com.example.ecommerce.domain.dto.UserAuthDTO;
 import com.example.ecommerce.domain.dto.UserDTO;
 import com.example.ecommerce.domain.entities.LoginResponse;
-import com.example.ecommerce.domain.entities.UserAuth;
+import com.example.ecommerce.domain.entities.User;
 import com.example.ecommerce.service.Auth.AuthService;
 import com.example.ecommerce.service.Auth.JwtService;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +25,14 @@ public class UserAuthController {
     }
 
     @PostMapping("/signup")
-    public GenericSucessfulOperation<UserAuthDTO> signUp(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> signUp(@RequestBody UserDTO userDTO) {
 
-        return this.authService.signUp(userDTO);
+        return ResponseEntity.ok(this.authService.signUp(userDTO));
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<LoginResponse> signIn(@RequestBody UserAuthDTO userAuthDTO) {
-        UserAuth authenticatedUser = this.authService.signIn(userAuthDTO);
+    public ResponseEntity<LoginResponse> signIn(@RequestBody UserDTO userDTO) {
+        User authenticatedUser = this.authService.signIn(userDTO);
 
         String jwtToken = this.jwtService.generateToken(authenticatedUser);
 

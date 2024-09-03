@@ -3,8 +3,6 @@ package com.example.ecommerce.domain.dto;
 import com.example.ecommerce.domain.entities.Image;
 import com.example.ecommerce.domain.entities.Product;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;

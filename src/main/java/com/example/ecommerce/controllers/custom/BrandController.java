@@ -25,7 +25,6 @@ public class BrandController extends CRUDController<Brand, UUID, BrandDTO> {
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public BrandDTO create(@RequestPart("brand") @Valid BrandDTO dto, @RequestPart(value = "image", required = false) MultipartFile image) {
-        System.out.println("BrandController.create" + dto);
         return this.service.create(dto);
     }
 

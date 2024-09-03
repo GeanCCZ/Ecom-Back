@@ -1,7 +1,6 @@
 package com.example.ecommerce.domain.dto;
 
 import com.example.ecommerce.domain.entities.Product;
-import com.example.ecommerce.domain.entities.SubCategory;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
 

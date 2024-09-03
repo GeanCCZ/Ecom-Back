@@ -7,7 +7,6 @@ import com.example.ecommerce.repository.custom.AddressRepository;
 import com.example.ecommerce.service.AddressService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class AddressServiceTest {
+class AddressServiceTest {
 
     @Mock
     private AddressService addressService;
@@ -96,7 +95,6 @@ public class AddressServiceTest {
 
         addressService.delete(id);
 
-//        verify(addressRepository).delete(address);
     }
 
 }

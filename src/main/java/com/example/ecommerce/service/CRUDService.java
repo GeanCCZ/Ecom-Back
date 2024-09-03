@@ -3,7 +3,7 @@ package com.example.ecommerce.service;
 import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.repository.CRUDRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,14 +19,12 @@ public abstract class CRUDService<T, ID, DTO>{
     public DTO create(DTO dto){
         T newEntity = this.getEntityFromDTO(dto);
 
-        DTO createdRegister = this.getDTOFromEntity(repository.save(newEntity));
-
-        return createdRegister;
+        return this.getDTOFromEntity(repository.save(newEntity));
     }
 
     public DTO update(ID id,DTO dto){
         if(this.findById(id) == null){
-            throw new RuntimeException("Register not found");
+            throw new ObjectNotFoundException("Register not found",dto);
         }
         T updatedEntity = this.getEntityFromDTO(dto);
 
@@ -42,7 +40,7 @@ public abstract class CRUDService<T, ID, DTO>{
     }
 
     public T findById(ID id){
-        return this.repository.findById(id).isPresent() ? this.repository.findById(id).get() : null;
+        return this.repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Register not found",id));
     }
 
     protected abstract void checkSave(DTO dto, T entityToSave);

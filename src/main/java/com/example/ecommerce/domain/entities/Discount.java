@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name = "discount")
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 public class Discount extends BaseEntity{
 
     @Column(name = "presented_value")

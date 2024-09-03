@@ -1,16 +1,17 @@
 package com.example.ecommerce.service.Auth;
 
-import com.example.ecommerce.domain.dto.GenericSucessfulOperation;
-import com.example.ecommerce.domain.dto.UserAuthDTO;
 import com.example.ecommerce.domain.dto.UserDTO;
-import com.example.ecommerce.domain.entities.UserAuth;
+import com.example.ecommerce.domain.entities.User;
 import com.example.ecommerce.repository.custom.UserRepository;
 import com.example.ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,31 +26,30 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
 
-    public GenericSucessfulOperation<UserAuthDTO> signUp(UserDTO userDTO) {
+    public UserDTO signUp(UserDTO userDTO) {
 
-        UserAuthDTO userAuthDTO = new UserAuthDTO(userDTO.email(), "");
+        UserDTO encodedPasswordUserDTO = new UserDTO(null, userDTO.addresses(), userDTO.role(), userDTO.image(), userDTO.orderList(), userDTO.reviewList(), userDTO.firstName(), userDTO.lastName(), userDTO.email(), userDTO.phone(), passwordEncoder.encode(userDTO.password()), true, userDTO.createdAt());
+        userService.create(encodedPasswordUserDTO);
 
-        GenericSucessfulOperation<UserAuthDTO> userCreationResponse = new GenericSucessfulOperation<UserAuthDTO>(userAuthDTO,"User created successfully");
-
-        userService.create(userDTO);
-
-        return userCreationResponse;
+        return new UserDTO(null, userDTO.addresses(), userDTO.role(), userDTO.image(), userDTO.orderList(), userDTO.reviewList(), userDTO.firstName(), userDTO.lastName(), userDTO.email(), userDTO.phone(), null, true, userDTO.createdAt());
     }
 
-    public UserAuth signIn(UserAuthDTO userAuthDTO) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userAuthDTO.email(), userAuthDTO.password())
-        );
+    public User signIn(UserDTO userDTO) {
+        authenticateUser(userDTO.email(), userDTO.password());
 
-        //FIX
-        System.out.println("----------");
+        Optional<User> user = userService.findByEmail(userDTO.email());
 
-        if(userService.findByEmail(userAuthDTO.email()).isEmpty()){
-            throw new RuntimeException("User not found");
+        if (user.isEmpty()) {
+            throw new ObjectNotFoundException(UserDTO.class, "email");
         }
 
-        UserAuth userAuth = new UserAuth(userAuthDTO.email(), userAuthDTO.password());
+        return user.get();
+    }
 
-        return userAuth;
+    private void authenticateUser(String email, String password) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password)
+        );
+
     }
 }

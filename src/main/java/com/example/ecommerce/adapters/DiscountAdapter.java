@@ -1,7 +1,6 @@
 package com.example.ecommerce.adapters;
 
 import com.example.ecommerce.domain.dto.DiscountDTO;
-import com.example.ecommerce.domain.dto.SupplierDTO;
 import com.example.ecommerce.domain.entities.Discount;
 import org.springframework.stereotype.Service;
 

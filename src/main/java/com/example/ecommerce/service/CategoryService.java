@@ -5,6 +5,7 @@ import com.example.ecommerce.domain.dto.CategoryDTO;
 import com.example.ecommerce.domain.entities.Category;
 import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.CategoryRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class CategoryService extends  CRUDService<Category,UUID, CategoryDTO>{
     protected void checkSave(CategoryDTO dto,Category entity){
         boolean alreadyExists = this.categoryRepository.findByDisplayName(dto.displayName()).isPresent();
         if(alreadyExists){
-            throw new RuntimeException();
+            throw new ObjectNotFoundException(dto.getClass(), "Category");
         }
     }
 

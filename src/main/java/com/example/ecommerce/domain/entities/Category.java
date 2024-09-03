@@ -1,10 +1,7 @@
 package com.example.ecommerce.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,6 +12,7 @@ import java.util.List;
 @Table(name = "category")
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = false)
 public class Category extends BaseEntity{
 
     @Column(name = "display_name", nullable = false)
