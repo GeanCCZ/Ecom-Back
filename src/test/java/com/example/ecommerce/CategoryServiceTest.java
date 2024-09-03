@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
-public class CategoryServiceTest {
+class CategoryServiceTest {
 
     @InjectMocks
     private CategoryService categoryService;
@@ -35,7 +35,7 @@ public class CategoryServiceTest {
     private Adapter<Category, CategoryDTO> categoryAdapter;
 
     @Test
-    public void testCategoryCreate(){
+    void testCategoryCreate() {
 
         CategoryDTO categoryDTO = new CategoryDTO(null,"Eletricidade",null);
         Category newCategory = new Category();
@@ -57,7 +57,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testCategoryUpdate(){
+    void testCategoryUpdate() {
         CategoryDTO categoryDTO = new CategoryDTO(null,"Eletricidade",null);
         Category newCategory = new Category();
 

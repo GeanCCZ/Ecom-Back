@@ -1,3 +1,5 @@
+package com.example.ecommerce;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.ecommerce.domain.dto.UserDTO;
@@ -6,17 +8,18 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Date;
+import java.util.UUID;
 
 @SpringBootTest
-public class UserServiceTest {
+class UserServiceTest {
 
     @InjectMocks
     private UserService userService;
 
     @Test
-    public void testUserCreate(){
-        UserDTO newUser = new UserDTO(null, null, null, null, null, null, "G.", "Son", "gson@gmail.com", "(44) 911111111", "null");
+    void testUserCreate() {
+        UserDTO newUser = new UserDTO(UUID.randomUUID(), null, null, null, null, null, "G.", "Son", " ", "(44) 911111111", "null", true, new Date());
 
         UserDTO createdUser = this.userService.create(newUser);
 
@@ -32,12 +35,12 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUserUpdate() {
-        UserDTO newUser = new UserDTO(null, null, null, null, null, null, "G.", "Son", "gson@gmail.com", "(44) 911111111", "null");
+    void testUserUpdate() {
+        UserDTO newUser = new UserDTO(UUID.randomUUID(), null, null, null, null, null, "G.", "Son", " ", "(44) 911111111", "null", null, null, null);
 
         UserDTO createdUser = this.userService.create(newUser);
 
-        UserDTO updateUserDTO = new UserDTO(createdUser.id(), null, null, null, null, null, "Thunder", "Son", "thunder@gmail.com", "(44) 9452175131", "null");
+        UserDTO updateUserDTO = new UserDTO(createdUser.id(), null, null, null, null, null, "G.", "Son", " ", "(44) 911111111", "null", null, null, null);
 
         UserDTO updatedUser = this.userService.update(createdUser.id(), updateUserDTO);
 

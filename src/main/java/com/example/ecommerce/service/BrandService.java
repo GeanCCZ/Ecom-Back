@@ -5,6 +5,7 @@ import com.example.ecommerce.domain.dto.BrandDTO;
 import com.example.ecommerce.domain.entities.Brand;
 import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.BrandRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class BrandService extends CRUDService<Brand, UUID, BrandDTO>{
     protected void checkSave(BrandDTO dto,Brand entity){
         boolean alreadyExists = this.brandRepository.findByDisplayName(dto.displayName()).isPresent();
         if(alreadyExists){
-            throw new RuntimeException();
+            throw new ObjectNotFoundException(BrandDTO.class, "displayName");
         }
     }
 

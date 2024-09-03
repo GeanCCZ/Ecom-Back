@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +21,7 @@ import java.util.List;
 @Table(name = "brand")
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 public class Brand extends BaseEntity{
 
     @Column(name = "display_name", nullable = false)

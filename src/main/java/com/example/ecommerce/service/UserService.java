@@ -5,6 +5,7 @@ import com.example.ecommerce.domain.dto.UserDTO;
 import com.example.ecommerce.domain.entities.User;
 import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.UserRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -24,12 +25,13 @@ public class UserService extends CRUDService<User, UUID, UserDTO>{
     protected void checkSave(UserDTO dto, User entity){
         boolean alreadyExists = this.userRepository.findById(dto.id()).isPresent();
         if(alreadyExists){
-            throw new RuntimeException();
+            throw new ObjectNotFoundException(UserDTO.class, "id");
         }
     }
 
     public Optional<User> findByEmail(String email){
-        return Optional.of(this.userRepository.findByEmail(email).orElseThrow());
+
+        return this.userRepository.findByEmail(email);
     }
 
 }

@@ -2,9 +2,11 @@ package com.example.ecommerce.service;
 
 import com.example.ecommerce.adapters.Adapter;
 import com.example.ecommerce.domain.dto.AddressDTO;
+import com.example.ecommerce.domain.dto.UserDTO;
 import com.example.ecommerce.domain.entities.Address;
 import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.AddressRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -23,7 +25,7 @@ public class AddressService extends CRUDService<Address, UUID, AddressDTO>{
     protected void checkSave(AddressDTO dto, Address entity){
         boolean alreadyExists = this.addressRepository.findById(dto.id()).isPresent();
         if(alreadyExists){
-            throw new RuntimeException();
+            throw new ObjectNotFoundException(UserDTO.class, "id");
         }
     }
 

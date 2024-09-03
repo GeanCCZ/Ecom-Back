@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Table(name = "address")
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 public class Address extends BaseEntity{
 
     @Column(name = "street", nullable = false)

@@ -3,17 +3,12 @@ package com.example.ecommerce.domain.entities;
 import jakarta.annotation.Nullable;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -24,26 +19,27 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class User extends BaseEntity {
+@EqualsAndHashCode(callSuper = true)
+public class User extends BaseEntity implements UserDetails {
 
     @OneToMany
     @JoinColumn(nullable = true)
-    private List<Address> addresses;
+    private transient List<Address> addresses;
 
     @OneToOne
     @JoinColumn
-    private Role role;
+    private transient Role role;
 
     @OneToOne
     @JoinColumn
-    private Image image;
+    private transient Image image;
 
     @OneToMany
     @JoinColumn
-    private List<Order> orders;
+    private transient List<Order> orders;
 
     @OneToMany
-    private List<Review> reviewList;
+    private transient List<Review> reviewList;
 
     @Column(name = "first_name")
     private String firstName;
@@ -51,7 +47,7 @@ public class User extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email",unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "phone")
@@ -67,4 +63,33 @@ public class User extends BaseEntity {
     @Column(name = "created_at")
     private Date createdAt;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
 }
