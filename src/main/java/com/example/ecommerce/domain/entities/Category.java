@@ -25,4 +25,7 @@ public class Category extends BaseEntity{
     @OneToMany
     private List<Product> productList;
 
+    @OneToMany
+    private List<SubCategory> subCategory;
+
 }

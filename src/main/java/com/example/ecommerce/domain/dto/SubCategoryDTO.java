@@ -16,6 +16,7 @@ public record SubCategoryDTO(
     @NotNull(message = "'Display Name' must be informed")
     String displayName,
 
-    List<Product> productList
+    List<Product> productList,
 
+    Category category
 ){}

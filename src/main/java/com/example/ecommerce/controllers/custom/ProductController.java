@@ -25,7 +25,7 @@ public class ProductController extends CRUDController<Product, UUID, ProductDTO>
         this.service = service;
     }
 
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ProductDTO create(@RequestPart("product") @Valid ProductDTO dto, @RequestPart(value = "imageList",required = false) Image image){
         return this.service.create(dto);
     }

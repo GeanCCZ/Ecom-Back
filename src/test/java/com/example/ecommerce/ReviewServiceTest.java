@@ -1,7 +1,7 @@
 package com.example.ecommerce;
 
 import com.example.ecommerce.domain.dto.ReviewDTO;
-import com.example.ecommerce.service.ReviewService;
+import com.example.ecommerce.service.custom.ReviewService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;

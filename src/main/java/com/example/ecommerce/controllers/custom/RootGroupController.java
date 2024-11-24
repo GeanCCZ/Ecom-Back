@@ -5,7 +5,7 @@ import com.example.ecommerce.domain.dto.RootGroupDTO;
 import com.example.ecommerce.domain.entities.Image;
 import com.example.ecommerce.domain.entities.RootGroup;
 import com.example.ecommerce.service.CRUDService;
-import com.example.ecommerce.service.RootGroupService;
+import com.example.ecommerce.service.custom.RootGroupService;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

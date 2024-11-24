@@ -3,7 +3,7 @@ package com.example.ecommerce;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.ecommerce.domain.dto.UserDTO;
-import com.example.ecommerce.service.UserService;
+import com.example.ecommerce.service.custom.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;

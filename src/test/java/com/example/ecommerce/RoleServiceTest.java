@@ -1,7 +1,7 @@
 package com.example.ecommerce;
 
 import com.example.ecommerce.domain.dto.RoleDTO;
-import com.example.ecommerce.service.RoleService;
+import com.example.ecommerce.service.custom.RoleService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;

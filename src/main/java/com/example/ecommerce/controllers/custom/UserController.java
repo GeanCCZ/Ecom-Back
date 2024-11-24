@@ -5,7 +5,7 @@ import com.example.ecommerce.domain.dto.UserDTO;
 import com.example.ecommerce.domain.entities.Image;
 import com.example.ecommerce.domain.entities.User;
 import com.example.ecommerce.service.CRUDService;
-import com.example.ecommerce.service.UserService;
+import com.example.ecommerce.service.custom.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

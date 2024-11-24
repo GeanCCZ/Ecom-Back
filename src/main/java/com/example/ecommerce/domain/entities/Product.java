@@ -29,10 +29,10 @@ public class Product extends BaseEntity{
     @Column(name = "description",nullable = true)
     private String description;
 
-    @Column(name = "price",nullable = false,columnDefinition = "Decimal(10,2) default 0.0")
+    @Column(name = "price", nullable = false, columnDefinition = "Decimal(10,2) default 0.0")
     private Double price;
 
-    @Column(name = "applicable_discount",nullable = true,columnDefinition = "Decimal(10,2) default 0.0")
+    @Column(name = "applicable_discount",nullable = true,columnDefinition = "Boolean default true")
     private Boolean discountEnabled;
 
     @OneToMany

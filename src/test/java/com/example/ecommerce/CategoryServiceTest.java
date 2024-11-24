@@ -5,7 +5,7 @@ import com.example.ecommerce.domain.dto.CategoryDTO;
 import com.example.ecommerce.domain.entities.Category;
 import com.example.ecommerce.repository.CRUDRepository;
 import com.example.ecommerce.repository.custom.CategoryRepository;
-import com.example.ecommerce.service.CategoryService;
+import com.example.ecommerce.service.custom.CategoryService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

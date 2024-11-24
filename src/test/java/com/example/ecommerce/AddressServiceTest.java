@@ -1,10 +1,10 @@
 package com.example.ecommerce;
 
-import com.example.ecommerce.adapters.AddressAdapter;
+import com.example.ecommerce.adapters.custom.AddressAdapter;
 import com.example.ecommerce.domain.dto.AddressDTO;
 import com.example.ecommerce.domain.entities.Address;
 import com.example.ecommerce.repository.custom.AddressRepository;
-import com.example.ecommerce.service.AddressService;
+import com.example.ecommerce.service.custom.AddressService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

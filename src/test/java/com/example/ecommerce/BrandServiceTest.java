@@ -1,9 +1,10 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.adapters.BrandAdapter;
+import com.example.ecommerce.adapters.custom.BrandAdapter;
 import com.example.ecommerce.domain.dto.BrandDTO;
 import com.example.ecommerce.domain.entities.Brand;
 import com.example.ecommerce.repository.custom.BrandRepository;
+import com.example.ecommerce.service.custom.BrandService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

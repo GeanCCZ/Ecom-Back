@@ -1,0 +1,31 @@
+package com.example.ecommerce.service.custom;
+
+import com.example.ecommerce.adapters.Adapter;
+import com.example.ecommerce.domain.dto.RootGroupDTO;
+import com.example.ecommerce.domain.entities.RootGroup;
+import com.example.ecommerce.repository.CRUDRepository;
+import com.example.ecommerce.repository.custom.RootGroupRepository;
+import com.example.ecommerce.service.CRUDService;
+import org.springframework.stereotype.Service;
+
+import java.util.UUID;
+
+@Service
+public class RootGroupService extends CRUDService<RootGroup, UUID, RootGroupDTO> {
+
+    private final RootGroupRepository rootGroupRepository;
+
+    public RootGroupService(CRUDRepository<RootGroup,UUID> repository, Adapter<RootGroup,RootGroupDTO > adapter, RootGroupRepository rootGroupRepository){
+        super(repository,adapter);
+        this.rootGroupRepository = rootGroupRepository;
+    }
+
+    @Override
+    protected void checkSave(RootGroupDTO dto, RootGroup entity){
+        boolean alreadyExists = this.rootGroupRepository.findById(dto.id()).isPresent();
+        if(alreadyExists){
+            throw new RuntimeException();
+        }
+    }
+
+}

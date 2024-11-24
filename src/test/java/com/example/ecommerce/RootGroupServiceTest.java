@@ -1,10 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.ecommerce.domain.dto.RootGroupDTO;
-import com.example.ecommerce.service.RootGroupService;
+import com.example.ecommerce.service.custom.RootGroupService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

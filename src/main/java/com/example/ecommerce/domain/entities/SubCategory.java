@@ -26,4 +26,7 @@ public class SubCategory extends BaseEntity{
 
     @ManyToMany
     private List<Product> productList;
+
+    @ManyToOne
+    private Category category;
 }
